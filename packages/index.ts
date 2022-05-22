@@ -11,7 +11,7 @@ import { ButtonPlugin } from './Button';
 import { FooPlugin } from './Foo';
 import { ClipboardPlugin } from './Clipboard';
 
-const MYKitPlugin: Plugin = {
+const BfoxPlugin: Plugin = {
   install(app: App) {
     ButtonPlugin.install?.(app);
     FooPlugin.install?.(app);
@@ -19,7 +19,7 @@ const MYKitPlugin: Plugin = {
   },
 };
 
-export default MYKitPlugin;
+export default BfoxPlugin;
 
 export * from './Button'
 export * from './Foo'

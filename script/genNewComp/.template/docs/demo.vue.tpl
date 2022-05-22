@@ -1,5 +1,5 @@
 <template>
   <div>
-    <my-{{ compClassName }} />
+    <bfox-{{ compClassName }} />
   </div>
 </template>

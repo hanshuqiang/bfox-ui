@@ -1,5 +1,5 @@
 <template>
-  <div class="mykit-preview">
+  <div class="Bfox-preview">
     <section>
       <slot></slot>
     </section>
@@ -15,10 +15,10 @@
 </template>
 
 <script>
-import Prism from 'prismjs';
-import '../assets/prism.css';
+import Prism from 'prismjs'
+import '../assets/prism.css'
 
-const isDev = import.meta.env.MODE === 'development';
+const isDev = import.meta.env.MODE === 'development'
 
 export default {
   props: {
@@ -26,55 +26,64 @@ export default {
     compName: {
       type: String,
       default: '',
-      require: true,
+      require: true
     },
     /** 要显示代码的组件 */
     demoName: {
       type: String,
       default: '',
-      require: true,
-    },
+      require: true
+    }
   },
   data() {
     return {
       sourceCode: '',
-      codeVisible: false,
-    };
+      codeVisible: false
+    }
   },
   computed: {
     previewSourceCode() {
-      return this.sourceCode.replace(/'\.\.\/\.\.\/index'/g, `'@tencent/my-kit'`);
-    },
+      return this.sourceCode.replace(
+        /'\.\.\/\.\.\/index'/g,
+        `'@tencent/bfox-kit'`
+      )
+    }
   },
   async mounted() {
     if (this.compName && this.demoName) {
       if (isDev) {
         this.sourceCode = (
-          await import(/* @vite-ignore */ `../../packages/${this.compName}/docs/${this.demoName}.vue?raw`)
-        ).default;
+          await import(
+            /* @vite-ignore */ `../../packages/${this.compName}/docs/${this.demoName}.vue?raw`
+          )
+        ).default
       } else {
-        this.sourceCode = await fetch(`${isDev ? '' : '/MY-Kit'}/packages/${this.compName}/docs/${this.demoName}.vue`).then((res) => res.text());
+        this.sourceCode = await fetch(
+          `${isDev ? '' : '/bfox-Kit'}/packages/${this.compName}/docs/${
+            this.demoName
+          }.vue`
+        ).then((res) => res.text())
       }
     }
-    await this.$nextTick();
-    Prism.highlightAll();
+    await this.$nextTick()
+    Prism.highlightAll()
   },
   methods: {
     async copyCode() {
       // this.$copyText(this.sourceCode);
     },
     showSourceCode() {
-      this.codeVisible = !this.codeVisible;
-    },
-  },
-};
+      this.codeVisible = !this.codeVisible
+    }
+  }
+}
 </script>
 
 <style lang="less">
 pre {
   line-height: 0;
 }
-.mykit-preview {
+.Bfox-preview {
   border: 4px;
   border: 1px dashed #e7e7e7;
   padding: 10px;

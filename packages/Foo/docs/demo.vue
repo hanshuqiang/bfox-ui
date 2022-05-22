@@ -1,5 +1,5 @@
 <template>
   <div>
-    <my-foo />
+    <bfox-foo />
   </div>
 </template>

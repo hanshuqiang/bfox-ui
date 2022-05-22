@@ -1,5 +1,5 @@
 <template>
-  <div class="my-kit-doc">
+  <div class="bfox-kit-doc">
     <aside>
       <router-link v-for="(link, index) in data.links" :key="index" :to="link.path">{{ link.name }}</router-link>
     </aside>
@@ -10,11 +10,11 @@
 </template>
 
 <script setup>
-import ComponentList from 'packages/list.json';
+import ComponentList from 'packages/list.json'
 import { reactive } from 'vue'
 
 const data = reactive({
-  links: ComponentList.map(item => ({
+  links: ComponentList.map((item) => ({
     path: `/components/${item.compName}`,
     name: item.compZhName
   }))
@@ -27,7 +27,7 @@ body {
   margin: 0;
   padding: 0;
 }
-.my-kit-doc {
+.bfox-kit-doc {
   display: flex;
   min-height: 100vh;
   aside {

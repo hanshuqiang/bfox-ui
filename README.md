@@ -16,16 +16,16 @@
 
 
 [在线体验
-](https://jrainlau.github.io/MY-Kit/index.html#/components/Button)
+](https://jrainlau.github.io/bfox-Kit/index.html#/components/Button)
 
 [Github 仓库
-](https://github.com/jrainlau/MY-Kit)
+](https://github.com/jrainlau/bfox-Kit)
 
 [演示视频](https://user-images.githubusercontent.com/12172868/145698280-730751be-a3f8-4989-abc2-dcf467362fb1.mp4)
 
 
 ## 一、开发框架初始化
-这一套开发框架我们把它命名为 `MY-Kit`。在技术选型上使用的是 Vite + Vue3 + Typescript。
+这一套开发框架我们把它命名为 `bfox-Kit`。在技术选型上使用的是 Vite + Vue3 + Typescript。
 
 在空白目录执行下列命令：
 
@@ -47,7 +47,7 @@ yarn create vite
 └── yarn.lock
 ```
 
-在根目录下新建一个 `/packages` 目录，后续组件的开发都会在该目录进行。以一个 `<my-button />` 组件为例，看看 `/packages` 目录内部是什么样的：
+在根目录下新建一个 `/packages` 目录，后续组件的开发都会在该目录进行。以一个 `<bfox-button />` 组件为例，看看 `/packages` 目录内部是什么样的：
 
 ```bash
 packages
@@ -72,7 +72,7 @@ packages
 
 ```html
 <template>
-  <button class="my-button" @click="$emit('click', $event)">
+  <button class="bfox-button" @click="$emit('click', $event)">
     <slot></slot>
   </button>
 </template>
@@ -82,7 +82,7 @@ defineEmits(['click']);
 </script>
 
 <style scoped>
-.my-button {
+.bfox-button {
   // 样式部分省略
 }
 </style>
@@ -97,18 +97,18 @@ defineEmits(['click']);
 import { createApp } from 'vue'
 import App from './app.vue'
 
-import MyKit from 'my-kit'
+import Bfox from 'bfox-kit'
 
-createApp(App).use(MyKit)
+createApp(App).use(Bfox)
 
 ```
 
 也允许局部调用：
 
 ```js
-import { Button } from 'my-kit'
+import { Button } from 'bfox-kit'
 
-Vue.component('my-button', Button)
+Vue.component('bfox-button', Button)
 ```
 
 因此需要为每一个组件定义一个 `VuePlugin` 的引用方式。`package/Button/index.ts` 的内容如下：
@@ -137,13 +137,13 @@ import { App, Plugin } from 'vue';
 
 import { ButtonPlugin } from './Button';
 
-const MyKitPlugin: Plugin = {
+const BfoxPlugin: Plugin = {
   install(app: App) {
     ButtonPlugin.install?.(app);
   },
 };
 
-export default MyKitPlugin;
+export default BfoxPlugin;
 
 export * from './Button';
 ```
@@ -167,23 +167,23 @@ export * from './Button';
 
 ---
 
-完成了上述组件库目录的初始化以后，此时我们的 `MY-Kit` 是已经可以被业务侧直接使用了。
+完成了上述组件库目录的初始化以后，此时我们的 `bfox-Kit` 是已经可以被业务侧直接使用了。
 
-回到根目录下找到 `src/main.ts` 文件，我们把整个 `MY-Kit` 引入：
+回到根目录下找到 `src/main.ts` 文件，我们把整个 `bfox-Kit` 引入：
 ```js
 import { createApp } from 'vue'
 import App from './App.vue'
 
-import MyKit from '../packages';
+import Bfox from '../packages';
 
-createApp(App).use(MyKit).mount('#app')
+createApp(App).use(Bfox).mount('#app')
 
 ```
-改写 `src/App.vue`，引入 `<my-button></my-button>` 试一下：
+改写 `src/App.vue`，引入 `<bfox-button></bfox-button>` 试一下：
 
 ```html
 <template>
-  <my-button>我是自定义按钮</my-button>
+  <bfox-button>我是自定义按钮</bfox-button>
 </template>
 ```
 运行 `yarn dev` 开启 Vite 的服务器以后，就可以直接在浏览器上看到效果了：
@@ -244,7 +244,7 @@ export default defineConfig({
 
 ```html
 <template>
-  <div class="my-kit-doc">
+  <div class="bfox-kit-doc">
     <aside>
       <router-link v-for="(link, index) in data.links" :key="index" :to="link.path">{{ link.name }}</router-link>
     </aside>
@@ -272,7 +272,7 @@ body {
   margin: 0;
   padding: 0;
 }
-.my-kit-doc {
+.bfox-kit-doc {
   display: flex;
   min-height: 100vh;
   aside {
@@ -293,18 +293,18 @@ body {
 ```markdown
 # 按钮组件
 
-<my-button>我是自定义按钮</my-button>
+<bfox-button>我是自定义按钮</bfox-button>
 ```
 
 完成以后就能在浏览器上看到效果了：
 ![image](https://user-images.githubusercontent.com/12172868/145666882-e80c2f35-00cb-4a32-ac4c-59e6302fc981.png)
 
-由于我们全局引入了 `MY-Kit`，所以里面所注册的自定义组件都可以直接在 Markdown 文件中像普通 HTML 标签一样被写入并被正确渲染。但是这里也有另一个问题，就是这些组件都是静态的无事件的，无法执行 JS 逻辑。比如当我想要实现点击按钮触发 click 事件然后弹一个告警弹窗出来，是无法直接这么写的：
+由于我们全局引入了 `bfox-Kit`，所以里面所注册的自定义组件都可以直接在 Markdown 文件中像普通 HTML 标签一样被写入并被正确渲染。但是这里也有另一个问题，就是这些组件都是静态的无事件的，无法执行 JS 逻辑。比如当我想要实现点击按钮触发 click 事件然后弹一个告警弹窗出来，是无法直接这么写的：
 
 ```markdown
 # 按钮组件
 
-<my-button @click="() => { alert(123) }">我是自定义按钮</my-button>
+<bfox-button @click="() => { alert(123) }">我是自定义按钮</bfox-button>
 ```
 
 那怎么办呢？还记得刚刚引入的解析 Markdown 的插件 `vite-plugin-md` 吗？仔细看它的文档，它是支持在 Markdown 里面写 setup 函数的！因此我们可以把需要执行 JS 逻辑的代码封装成一个组件，然后在 Markdown 里通过 setup 来引入。
@@ -314,9 +314,9 @@ body {
 ```html
 <template>
   <div>
-    <my-button @click="onClick(1)">第一个</my-button>
-    <my-button @click="onClick(2)">第二个</my-button>
-    <my-button @click="onClick(3)">第三个</my-button>
+    <bfox-button @click="onClick(1)">第一个</bfox-button>
+    <bfox-button @click="onClick(2)">第二个</bfox-button>
+    <bfox-button @click="onClick(3)">第三个</bfox-button>
   </div>
 </template>
 
@@ -340,7 +340,7 @@ import demo from './demo.vue'
 最后就能实现点击响应了。
 ![Kapture 2021-12-11 at 14 43 53](https://user-images.githubusercontent.com/12172868/145667262-26cc82af-6910-47a7-8a92-7cd01f84b078.gif)
 
-与此同时，如果我们对 `<my-button />` 的本体 Vue 文件进行任何的修改，都能够实时在文档中体现出来。
+与此同时，如果我们对 `<bfox-button />` 的本体 Vue 文件进行任何的修改，都能够实时在文档中体现出来。
 
 ## 三、代码预览功能
 可交互式文档已经基本弄好了，但还有一个问题，就是不能直观地预览代码。你可能会说，要预览代码很简单啊，直接在 Markdown 里面把代码贴进去不就好了？话虽如此并没有错，但是秉承着“偷懒才是第一生产力”，估计没有人喜欢把自己写过的代码再抄一遍，肯定是希望能够有个办法既能够在文档里把所写的 demo 展示出来，又能直接看到它的代码，比如说这样：
@@ -414,7 +414,7 @@ if (isDev) {
 ![image](https://user-images.githubusercontent.com/12172868/145676612-0f83b2f1-40b2-4574-a8b7-7762da808130.png)
 
 
-但是这样的源码展示非常丑，只有干巴巴的字符，我们有必要给它们加个高亮。高亮的方案我选择了 PrismJS，它非常小巧又灵活，只需要引入一个相关的 CSS 主题文件，然后执行 `Prism.highlightAll()` 即可。本例所使用的 CSS 主题文件[已经放置在仓库](https://github.com/jrainlau/MY-Kit/blob/main/src/assets/prism.css)，可以自行取用。
+但是这样的源码展示非常丑，只有干巴巴的字符，我们有必要给它们加个高亮。高亮的方案我选择了 PrismJS，它非常小巧又灵活，只需要引入一个相关的 CSS 主题文件，然后执行 `Prism.highlightAll()` 即可。本例所使用的 CSS 主题文件[已经放置在仓库](https://github.com/jrainlau/bfox-Kit/blob/main/src/assets/prism.css)，可以自行取用。
 
 回到项目，执行 `yarn add prismjs -D` 安装 PrismJS，然后在 `<Preview />` 组件中引入：
 
@@ -516,7 +516,7 @@ import {{ compName }} from './src/index.vue';
 
 export const {{ compName }}Plugin: Plugin = {
   install(app: App) {
-    app.component('my-{{ compClassName }}', {{ compName }});
+    app.component('bfox-{{ compClassName }}', {{ compName }});
   },
 };
 
@@ -544,7 +544,7 @@ import Button from './src/index.vue';
 
 export const ButtonPlugin: Plugin = {
   install(app: App) {
-    app.component('my-button', Button);
+    app.component('bfox-button', Button);
   },
 };
 
@@ -610,7 +610,7 @@ run()
 接下来只要执行 `yarn gen` 就可以进入交互式终端，回答问题自动完成新建组件文件、修改配置的功能，并能够在可交互式文档中实时预览效果。
 
 ## 五、分开文档和库的构建逻辑
-在默认的 Vite 配置中，执行 `yarn build` 所构建出来的产物是“可交互式文档网站”，并非“组件库”本身。为了构建一个 `my-kit` 组件库并发布到 npm，我们需要将构建的逻辑分开。
+在默认的 Vite 配置中，执行 `yarn build` 所构建出来的产物是“可交互式文档网站”，并非“组件库”本身。为了构建一个 `bfox-kit` 组件库并发布到 npm，我们需要将构建的逻辑分开。
 
 在根目录下添加一个 `/build` 目录，依次写入 `base.js`，`lib.js` 和 `doc.js`，分别为基础配置、库配置和文档配置。
 
@@ -657,8 +657,8 @@ export default defineConfig({
     outDir: 'dist',
     lib: {
       entry: resolve(__dirname, '../packages/index.ts'),
-      name: 'MYKit',
-      fileName: (format) => `my-kit.${format}.js`,
+      name: 'Bfox',
+      fileName: (format) => `bfox-kit.${format}.js`,
     },
     rollupOptions: {
       // 确保外部化处理那些你不想打包进库的依赖
@@ -717,8 +717,8 @@ copyDir('./packages', './docs');
 `build:lib` 的产物：
 ```bash
 dist
-├── my-kit.es.js
-├── my-kit.umd.js
+├── bfox-kit.es.js
+├── bfox-kit.umd.js
 ├── packages
 │   ├── Button
 │   │   ├── index.d.ts

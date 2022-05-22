@@ -1,6 +1,6 @@
 <template>
 
-  <div class="clipboard" style="width:20px;height:20px;" @click="handleCopy(text)">
+  <div class="clipboard" style="width:17px;height:17px;" @click="handleCopy(text)">
     <svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
       <path fill="currentColor"
         d="M768 832a128 128 0 0 1-128 128H192A128 128 0 0 1 64 832V384a128 128 0 0 1 128-128v64a64 64 0 0 0-64 64v448a64 64 0 0 0 64 64h448a64 64 0 0 0 64-64h64z">
