@@ -4,8 +4,16 @@
   </button>
 </template>
 
+<!-- <script lang="ts">
+export default {
+  name: 'BuButton'
+}
+</script> -->
+
 <script lang="ts" setup>
 defineEmits(['click'])
+
+
 </script>
 
 <style scoped lang="less">
@@ -16,9 +24,11 @@ defineEmits(['click'])
   border: none;
   border-radius: 4px;
   color: #fff;
+
   &:active {
     background: rgb(92, 185, 243);
   }
+
   &:not(:last-child) {
     margin-right: 15px;
   }

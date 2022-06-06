@@ -7,20 +7,18 @@
  */
 import { App, Plugin } from 'vue';
 
-import { ButtonPlugin } from './Button';
-import { FooPlugin } from './Foo';
-import { ClipboardPlugin } from './Clipboard';
+import { ButtonPlugin } from './components/Button';
+
+import { ClipboardPlugin } from './components/Clipboard';
 
 const BfoxPlugin: Plugin = {
   install(app: App) {
     ButtonPlugin.install?.(app);
-    FooPlugin.install?.(app);
     ClipboardPlugin.install?.(app);
   },
 };
 
 export default BfoxPlugin;
 
-export * from './Button'
-export * from './Foo'
-export * from './Clipboard'
+export * from './components/Button'
+export * from './components/Clipboard'

@@ -1,5 +1,5 @@
 <template>
   <div>
-    <bfox-foo />
+    <bu-clipboard :text="'aaa'" />
   </div>
 </template>

@@ -54,14 +54,11 @@ export default {
       if (isDev) {
         this.sourceCode = (
           await import(
-            /* @vite-ignore */ `../../packages/${this.compName}/docs/${this.demoName}.vue?raw`
+            /* @vite-ignore */ `../../packages/components/${this.compName}/docs/${this.demoName}.vue?raw`
           )
         ).default
       } else {
-        this.sourceCode = await fetch(
-          `${isDev ? '' : '/bfox-Kit'}/packages/${this.compName}/docs/${
-            this.demoName
-          }.vue`
+        this.sourceCode = await fetch(`${isDev ? '' : ''}/packages/components/${this.compName}/docs/${this.demoName}.vue`
         ).then((res) => res.text())
       }
     }
@@ -83,11 +80,13 @@ export default {
 pre {
   line-height: 0;
 }
+
 .Bfox-preview {
   border: 4px;
   border: 1px dashed #e7e7e7;
   padding: 10px;
   border-bottom: 1px dashed #e7e7e7;
+
   section {
     margin: 15px;
   }
@@ -96,10 +95,12 @@ pre {
 .source-code {
   max-height: 500px;
 }
+
 .language-html {
   margin: 0;
   padding: 0 15px;
 }
+
 .preview-bottom {
   height: 40px;
   display: flex;

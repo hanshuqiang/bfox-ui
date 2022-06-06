@@ -6,12 +6,6 @@
     "compClassName": "button"
   },
   {
-    "compName": "Foo",
-    "compZhName": "测试组件",
-    "compDesc": "默认：这是一个新组件",
-    "compClassName": "foo"
-  },
-  {
     "compName": "Clipboard",
     "compZhName": "复制组件",
     "compDesc": "复制文字",

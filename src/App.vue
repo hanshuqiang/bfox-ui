@@ -27,9 +27,11 @@ body {
   margin: 0;
   padding: 0;
 }
+
 .bfox-kit-doc {
   display: flex;
   min-height: 100vh;
+
   aside {
     width: 200px;
     padding: 15px;
@@ -37,6 +39,7 @@ body {
     display: flex;
     flex-direction: column;
   }
+
   main {
     width: 100%;
     flex: 1;

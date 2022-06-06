@@ -6,12 +6,12 @@ import demo from './demo.vue'
 
 <!-- 正文开始 -->
 
-# 测试组件
+# 复制组件
 
-默认：这是一个新组件
+复制文字
 
 ## 基础用法
-<Preview comp-name="Foo" demo-name="demo">
+<Preview comp-name="Clipboard" demo-name="demo">
   <demo />
 </Preview>
 

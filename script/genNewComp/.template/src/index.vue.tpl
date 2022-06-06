@@ -1,11 +1,13 @@
 <template>
-  <div class="bfox-{{ compClassName }}">
+  <div class="{{ compClassName }}">
     我是{{ compZhName }}组件
   </div>
 </template>
 
 <script lang="ts" setup>
-
+defineOptions({
+  name: '{{compName}}',
+})
 </script>
 
 <style scoped>
