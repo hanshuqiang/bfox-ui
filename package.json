@@ -1,6 +1,6 @@
 {
   "name": "bfox-ui",
-  "version": "2.0.7",
+  "version": "2.0.8",
   "main": "dist/bfox-kit.umd.js",
   "description": "bfox-ui",
   "scripts": {
@@ -10,7 +10,7 @@
     "gen": "node ./script/genNewComp/index.js"
   },
   "dependencies": {
-    "element-plus": "^2.2.1",
+    "element-plus": "^2.0.1",
     "prismjs": "^1.25.0",
     "vue": "^3.2.23",
     "vue-clipboard3": "^2.0.0"
