@@ -8,17 +8,30 @@
 
 import { createRouter, createWebHashHistory, RouterOptions } from 'vue-router'
 
-const routes = [{
-  title: '按钮',
-  name: 'Button',
-  path: '/components/Button',
-  component: () => import('packages/components/Button/docs/README.md'),
-}, {
-  title: '复制组件',
-  name: 'Clipboard',
-  path: '/components/Clipboard',
-  component: () => import('packages/components/Clipboard/docs/README.md'),
-}];
+const routes = [
+  {
+    title: '首页',
+    name: 'Home',
+    path: '/',
+    component: () => import('./index.vue'),
+  },
+  {
+    title: '快速开始',
+    name: 'Install',
+    path: '/install',
+    component: () => import('./install/index.vue'),
+  },
+  {
+    title: '按钮',
+    name: 'Button',
+    path: '/components/Button',
+    component: () => import('packages/components/Button/docs/README.md'),
+  }, {
+    title: '复制组件',
+    name: 'Clipboard',
+    path: '/components/Clipboard',
+    component: () => import('packages/components/Clipboard/docs/README.md'),
+  }];
 
 const routerConfig = {
   history: createWebHashHistory(),

@@ -14,10 +14,20 @@ import ComponentList from 'packages/list.json'
 import { reactive } from 'vue'
 
 const data = reactive({
-  links: ComponentList.map((item) => ({
-    path: `/components/${item.compName}`,
-    name: item.compZhName
-  }))
+  links: [
+    {
+      path: '/',
+      name: '简介'
+    },
+    {
+      path: '/install',
+      name: '快速开始'
+    },
+    ...ComponentList.map((item) => ({
+      path: `/components/${item.compName}`,
+      name: item.compZhName
+    }))
+  ]
 })
 </script>
 
