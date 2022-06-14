@@ -6,10 +6,10 @@
  * 根据 /packages 目录下的组件所生成的组件类侧边导航栏配置，请勿手动修改
  */
 
-import { createRouter, createWebHashHistory, RouterOptions } from 'vue-router'
+ import { createRouter, createWebHashHistory, RouterOptions } from 'vue-router'
 
-const routes = [
-  {
+ const routes = [
+   {
     title: '首页',
     name: 'Home',
     path: '/',
@@ -26,23 +26,28 @@ const routes = [
     name: 'Button',
     path: '/components/Button',
     component: () => import('packages/components/Button/docs/README.md'),
-  }, {
+  },{
     title: '复制组件',
     name: 'Clipboard',
     path: '/components/Clipboard',
     component: () => import('packages/components/Clipboard/docs/README.md'),
+  },{
+    title: '表格',
+    name: 'BuTable',
+    path: '/components/BuTable',
+    component: () => import('packages/components/BuTable/docs/README.md'),
   }];
-
-const routerConfig = {
-  history: createWebHashHistory(),
-  routes,
-  scrollBehavior(to: any, from: any) {
-    if (to.path !== from.path) {
-      return { top: 0 };
-    }
-  },
-};
-
-const router = createRouter(routerConfig as RouterOptions);
-
-export default router;
+ 
+ const routerConfig = {
+   history: createWebHashHistory(),
+   routes,
+   scrollBehavior(to: any, from: any) {
+     if (to.path !== from.path) {
+       return { top: 0 };
+     }
+   },
+ };
+ 
+ const router = createRouter(routerConfig as RouterOptions);
+ 
+ export default router;

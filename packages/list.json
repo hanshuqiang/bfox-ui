@@ -10,5 +10,11 @@
     "compZhName": "复制组件",
     "compDesc": "复制文字",
     "compClassName": "clipboard"
+  },
+  {
+    "compName": "BuTable",
+    "compZhName": "表格",
+    "compDesc": "表格",
+    "compClassName": "bu-table"
   }
 ]

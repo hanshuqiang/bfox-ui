@@ -6,21 +6,21 @@ const getTplFilePath = (meta) => ({
   // docs 目录
   readme: {
     from: './.template/docs/README.md.tpl',
-    to: `../../packages/${meta.compName}/docs/README.md`
+    to: `../../packages/components/${meta.compName}/docs/README.md`
   },
   demo: {
     from: './.template/docs/demo.vue.tpl',
-    to: `../../packages/${meta.compName}/docs/demo.vue`
+    to: `../../packages/components/${meta.compName}/docs/demo.vue`
   },
   // src 目录
   vue: {
     from: './.template/src/index.vue.tpl',
-    to: `../../packages/${meta.compName}/src/index.vue`
+    to: `../../packages/components/${meta.compName}/src/index.vue`
   },
   // 根目录
   install: {
     from: './.template/index.ts.tpl',
-    to: `../../packages/${meta.compName}/index.ts`
+    to: `../../packages/components/${meta.compName}/index.ts`
   },
 })
 
@@ -59,7 +59,7 @@ const routerTplReplacer = (listFileContent) => {
     title: '${comp.compZhName}',
     name: '${comp.compName}',
     path: '/components/${comp.compName}',
-    component: () => import('packages/${comp.compName}/docs/README.md'),
+    component: () => import('packages/components/${comp.compName}/docs/README.md'),
   }`
     })
   }
@@ -75,9 +75,9 @@ const installTsTplReplacer = (listFileContent) => {
   const installFileTo = '../../packages/index.ts' // 这里没有写错，别慌
   const installFileTpl = fs.readFileSync(resolve(__dirname, installFileFrom), 'utf-8')
   const installMeta = {
-    importPlugins: listFileContent.map(({ compName }) => `import { ${compName}Plugin } from './${compName}';`).join('\n'),
+    importPlugins: listFileContent.map(({ compName }) => `import { ${compName}Plugin } from './components/${compName}';`).join('\n'),
     installPlugins: listFileContent.map(({ compName }) => `${compName}Plugin.install?.(app);`).join('\n    '),
-    exportPlugins: listFileContent.map(({ compName }) => `export * from './${compName}'`).join('\n'),
+    exportPlugins: listFileContent.map(({ compName }) => `export * from './components/${compName}'`).join('\n'),
   }
   const installFileContent = handlebars.compile(installFileTpl, { noEscape: true })(installMeta)
   fs.outputFile(resolve(__dirname, installFileTo), installFileContent, err => {

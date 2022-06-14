@@ -10,6 +10,7 @@
     "gen": "node ./script/genNewComp/index.js"
   },
   "dependencies": {
+    "axios": "^0.27.2",
     "element-plus": "^2.0.1",
     "prismjs": "^1.25.0",
     "vue": "^3.2.23",
@@ -22,6 +23,9 @@
     "handlebars": "^4.7.7",
     "inquirer": "^8.2.0",
     "less": "^4.1.2",
+    "node-sass": "^7.0.1",
+    "sass": "^1.52.3",
+    "sass-loader": "^13.0.0",
     "typescript": "^4.4.4",
     "unplugin-vue-define-options": "^0.6.1",
     "vite": "^2.7.0",

@@ -2,7 +2,7 @@ import { createApp } from 'vue'
 import App from './App.vue'
 import router from './router'
 
-import './assets/markdown.css';
+import './assets/markdown.scss';
 
 import BfoxUI from '../packages';
 import Preview from './components/Preview.vue';
