@@ -90,22 +90,22 @@ pre {
   section {
     margin: 15px;
   }
-}
 
-.source-code {
-  max-height: 500px;
-}
+  .source-code {
+    max-height: 500px;
+  }
 
-.language-html {
-  margin: 0;
-  padding: 0 15px;
-}
+  .language-html {
+    margin: 0;
+    padding: 0 15px;
+  }
 
-.preview-bottom {
-  height: 40px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border-top: 1px dashed #e7e7e7;
+  .preview-bottom {
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-top: 1px dashed #e7e7e7;
+  }
 }
 </style>

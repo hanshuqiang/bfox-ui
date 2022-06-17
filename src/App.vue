@@ -1,6 +1,6 @@
 <template>
   <div class="bfox-kit-doc">
-    <aside>
+    <aside class="bfox-kit-doc_sider">
       <router-link v-for="(link, index) in data.links" :key="index" :to="link.path">{{ link.name }}</router-link>
     </aside>
     <main>
@@ -32,22 +32,26 @@ const data = reactive({
 </script>
 
 <style lang="less">
-html,
-body {
-  margin: 0;
-  padding: 0;
-}
-
 .bfox-kit-doc {
   display: flex;
   min-height: 100vh;
 
-  aside {
+  &_sider {
     width: 200px;
     padding: 15px;
     border-right: 1px solid #ccc;
     display: flex;
     flex-direction: column;
+
+    a {
+      margin: 5px;
+      text-decoration: none;
+      color: #606266;
+
+      &:hover {
+        color: #409eff
+      }
+    }
   }
 
   main {

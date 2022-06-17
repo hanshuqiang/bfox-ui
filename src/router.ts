@@ -36,6 +36,11 @@
     name: 'BuTable',
     path: '/components/BuTable',
     component: () => import('packages/components/BuTable/docs/README.md'),
+  },{
+    title: '弹框',
+    name: 'BuDialog',
+    path: '/components/BuDialog',
+    component: () => import('packages/components/BuDialog/docs/README.md'),
   }];
  
  const routerConfig = {

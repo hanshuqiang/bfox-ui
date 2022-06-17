@@ -10,12 +10,14 @@ import { App, Plugin } from 'vue';
 import { ButtonPlugin } from './components/Button';
 import { ClipboardPlugin } from './components/Clipboard';
 import { BuTablePlugin } from './components/BuTable';
+import { BuDialogPlugin } from './components/BuDialog';
 
 const BfoxPlugin: Plugin = {
   install(app: App) {
     ButtonPlugin.install?.(app);
     ClipboardPlugin.install?.(app);
     BuTablePlugin.install?.(app);
+    BuDialogPlugin.install?.(app);
   },
 };
 
@@ -24,3 +26,4 @@ export default BfoxPlugin;
 export * from './components/Button'
 export * from './components/Clipboard'
 export * from './components/BuTable'
+export * from './components/BuDialog'
