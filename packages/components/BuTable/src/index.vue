@@ -2,7 +2,7 @@
   <div class="app-table">
     <div class="app-tools">
       <slot name="tools"></slot>
-      <dialogTools v-if="props.customColumn" title="自定义显示列" v-model="colunmVisible" :columns="props.columns" />
+      <dialogTools v-if="props.customColumn" title="自定义显示列" :colunmVisible="colunmVisible" :columns="props.columns" />
     </div>
     <el-table :fit="fit" v-loading="loading" :data="tableData" style="width: 100%" :row-class-name="rowClassName"
       :border="border" :span-method="spanMethod" :row-key="rowKey" :default-expand-all="defaultExpandAll"
@@ -16,12 +16,16 @@
 
         <el-table-column v-if="val.show" :label="val.label" :prop="key" :align="val.align" :width="val.width"
           :min-width="val.minWidth" :sortable="val.sortable" :fixed="val.fixed" :type="val.type">
+
+          <template v-if="val.renderHeader" #header="scope">
+            <component :is="val.renderHeader"></component>
+          </template>
           <template #default="scope">
 
             <div v-if="val.show && val.type == 'datetime'">
               <span>{{
                   scope.row[scope.column.property] ?
-                    $moment(scope.row[scope.column.property]).format('YYYY-MM-DD HH:mm:ss') : ''
+                    moment(scope.row[scope.column.property]).format('YYYY-MM-DD HH:mm:ss') : ''
               }} </span>
             </div>
 
@@ -49,17 +53,9 @@
               </span>
             </div>
 
-
-
           </template>
-
         </el-table-column>
-
-
       </template>
-
-
-
     </el-table>
     <div class="gva-pagination" v-if="isPaging">
       <el-pagination layout="total, sizes, prev, pager, next, jumper" :current-page="paginationOpt.page"
@@ -71,8 +67,9 @@
 
 <script setup>
 
-import { ref, nextTick, onMounted } from 'vue'
+import { ref, nextTick, onMounted, h, markRaw } from 'vue'
 import axios from 'axios'
+import moment from 'moment'
 import { initScoll } from './tableHeadScoll'
 import { propsObj } from './props'
 import { useRouter, useRoute } from 'vue-router'
@@ -82,7 +79,7 @@ defineOptions({
   name: 'BuTable',
 })
 const route = useRoute()
-const appColumns = ref({})
+let appColumns = {}
 
 //缓存中的列名
 let lsCol = localStorage.getItem('app-table-column_' + route.name.toLowerCase())
@@ -102,10 +99,10 @@ for (const key in t) {
     t[key].show = true
   }
 }
-appColumns.value = t
+appColumns = t
 
 //如果缓存中显示得字段为空 默认全选，因为是页面第一次使用，未设置过缓存
-if (lsCol.length == 0) colunmVisible.value = Object.keys(appColumns.value)
+if (lsCol.length == 0) colunmVisible.value = Object.keys(appColumns)
 
 
 // props
@@ -180,7 +177,11 @@ const handleSearchTableData = async (reload = false) => {
   loading.value = true
 
   let { data: res } = await axios(requestConfig)
+
   console.log('res', res);
+  if (props.apiFilter) {
+    res = props.apiFilter(res)
+  }
   loading.value = false
   tableData.value = res.data.list
   paginationOpt.value.total = res.data.total
@@ -196,8 +197,10 @@ defineExpose({
 
 //生命周期
 onMounted(async () => {
-  initScoll()
   handleSearchTableData()
+  nextTick(() => {
+    initScoll()
+  })
 })
 </script>
 
@@ -205,6 +208,20 @@ onMounted(async () => {
 .app-table {
   .app-tools {
     margin: 0 0 10px 0;
+  }
+}
+
+:deep(.el-table) {
+  .danger-row {
+    background: #f3cfd3;
+  }
+
+  .success-row {
+    background: #f0f9eb;
+  }
+
+  .warning-row {
+    background: #fdf6ec;
   }
 }
 </style>

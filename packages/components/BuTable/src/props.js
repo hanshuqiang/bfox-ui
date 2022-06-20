@@ -28,11 +28,15 @@ export const propsObj = {
         type: String,
         default: 'get'
     },
+    /**重组接口返回的数据 */
+    apiFilter: {
+        type: Function,
+    },
     //自定义列
     columns: {
-        type: Array,
+        type: Object,
         default: () => {
-            return []
+            return {}
         }
     },
     /**

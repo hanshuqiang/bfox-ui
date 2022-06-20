@@ -24,6 +24,7 @@
 </template>
 
 <script lang="ts" setup>
+import { analyzeMetafile } from 'esbuild';
 import { ref, onMounted } from 'vue'
 defineOptions({
   name: 'BuDialog',
@@ -50,10 +51,10 @@ const props = defineProps({
 })
 const emits = defineEmits(['close', 'submit'])
 
-const handleCancel = (e) => {
+const handleCancel = () => {
   emits('close', false)
 }
-const handleSubmit = (e) => {
+const handleSubmit = () => {
   emits('submit', false)
 }
 </script>

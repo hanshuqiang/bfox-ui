@@ -11,7 +11,13 @@
 import { reactive } from 'vue';
 import MyDialog from './MyDialog.vue';
 
+interface ICityData {
 
+  provinceCode: string
+
+
+
+}
 
 // 尝试使用reactive 定义响应式变量
 const dialogModal = reactive({
@@ -20,16 +26,20 @@ const dialogModal = reactive({
   /**传给弹框的数据,内部数据结构可根据业务需要灵活定义 */
   options: {},
   /**关闭弹框 */
-  close: (e) => {
+  close: (e: Boolean) => {
     dialogModal.name = null
     if (e) {
       //这里可以刷新列表
     }
   },
-  /**打开弹框 */
-  open: (data, component) => {
+  /**
+   * @data 传给弹框的数据
+   * @component 组件
+   * 打开弹框
+   */
+  open: (data: any, component: any) => {
     dialogModal.name = component
-    // 根据不同弹框传递不同参数 ,此方法比较好，省去了各种if判断 
+    // 根据不同弹框传递不同参数 ,省去了各种if判断 
     dialogModal.options[component.name] = data
   }
 })
