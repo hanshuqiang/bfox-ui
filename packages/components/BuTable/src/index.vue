@@ -1,5 +1,5 @@
 <template>
-  <div class="app-table">
+  <div class="app-table" :id="'bu-table-id_' + id">
     <div class="app-tools">
       <slot name="tools"></slot>
       <dialogTools v-if="props.customColumn" title="自定义显示列" :colunmVisible="colunmVisible" :columns="props.columns" />
@@ -80,7 +80,7 @@ defineOptions({
 })
 const route = useRoute()
 let appColumns = {}
-
+const id = ref(new Date().valueOf() + '' +)
 //缓存中的列名
 let lsCol = localStorage.getItem('app-table-column_' + route.name.toLowerCase())
 
