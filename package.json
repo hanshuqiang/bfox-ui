@@ -37,5 +37,16 @@
     "vite-plugin-md": "^0.11.4",
     "vue-router": "^4.0.12",
     "vue-tsc": "^0.28.10"
-  }
+  },
+  "keywords": [],
+  "author": "hanpanpan",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hanpanapn/bfox-ui.git"
+  },
+  "bugs": {
+    "url": "https://github.com/hanpanapn/bfox-ui/issues"
+  },
+  "homepage": "https://hanpanapn.github.io/bfox-ui/#/"
 }
