@@ -37,6 +37,7 @@ const data = reactive({
   display: flex;
   min-height: 100vh;
 
+
   &_sider {
     width: 200px;
     padding: 15px;
@@ -52,6 +53,7 @@ const data = reactive({
       background: #409eff1a;
       margin: 2px 0;
       border-radius: 5px;
+      min-width: 100px;
 
       &:hover {
         color: #409eff
@@ -68,6 +70,20 @@ const data = reactive({
     width: 100%;
     flex: 1;
     padding: 15px;
+
+    .prev_table {
+
+      table {
+        border-collapse: collapse;
+        width: 100%;
+      }
+
+      table,
+      td,
+      th {
+        border: 1px solid rgb(235, 238, 245);
+      }
+    }
   }
 }
 </style>

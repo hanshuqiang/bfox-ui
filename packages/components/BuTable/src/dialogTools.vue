@@ -2,9 +2,7 @@
   <div style="display: flex;justify-content: end;text-align: center;margin-left: auto;">
     <el-popover placement="left" :width="600" trigger="click">
       <template #reference>
-        <el-icon :size="20" title="自定义列">
-          <Grid />
-        </el-icon>
+        <el-icon class="icon_config" :size="20" title="自定义列"><Tools /></el-icon>
       </template>
       <el-checkbox-group v-model="colunmVisible">
         <h5>自定义显示列</h5>
@@ -79,6 +77,13 @@ onMounted(() => {
     label {
       width: unset;
     }
+  }
+}
+
+.icon_config{
+  cursor: pointer;
+  &:hover{
+    color: #409eff;
   }
 }
 </style>
