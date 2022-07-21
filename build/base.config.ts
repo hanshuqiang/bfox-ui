@@ -6,6 +6,7 @@ import DefineOptions from 'unplugin-vue-define-options/vite';
 import vueJsx from '@vitejs/plugin-vue-jsx'
 // 文档: https://vitejs.dev/config/
 export default defineConfig({
+   
   resolve: {
     alias: {
       '@': resolve(__dirname, '../src'),
