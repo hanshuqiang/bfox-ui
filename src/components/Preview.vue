@@ -51,6 +51,7 @@ export default {
   },
   async mounted() {
     if (this.compName && this.demoName) {
+      console.log('isdev',isDev);
       if (isDev) {
         this.sourceCode = (
           await import(
