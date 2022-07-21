@@ -1,6 +1,7 @@
 <!-- 加载 demo 组件 start -->
 <script setup>
 import demo from './demo.vue'
+import demo2 from './demo2.vue'
 </script>
 <!-- 加载 demo 组件 end -->
 
@@ -8,11 +9,22 @@ import demo from './demo.vue'
 
 # 表格
 
-表格
+对element table 扩展了自定义列功能，分页功能
 
 ## 基础用法
+
+基础用法中不含自定义列表功能
+
 <Preview comp-name="BuTable" demo-name="demo">
   <demo />
+</Preview>
+
+## 自定义列用法
+
+自定义列需要将原来的html标签的列代码转写成js对象，才能使用程序动态控制是否展示
+
+<Preview comp-name="BuTable" demo-name="demo2">
+  <demo2 />
 </Preview>
 
 ## 属性

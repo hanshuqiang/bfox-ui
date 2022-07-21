@@ -2,33 +2,37 @@
   <div class="app-table">
     <div class="app-tools">
       <slot name="tools"></slot>
-      <dialogTools v-if="props.customColumn" title="自定义显示列" v-model="colunmVisible" :columns="props.columns" />
+      <dialogTools v-if="props.customColumn" title="自定义显示列" :colunmVisible="colunmVisible" :columns="props.columns" />
     </div>
-    <el-table :fit="fit" v-loading="loading" :data="tableData" style="width: 100%" :row-class-name="rowClassName"
-      :border="border" :span-method="spanMethod" :row-key="rowKey" :default-expand-all="defaultExpandAll"
-      @sort-change="sortChange" @selection-change="handleSelectionChange">
+    <el-table :fit="fit" :size="props.size" :show-header="props.showHeader" v-loading="loading" :data="tableData"
+      style="width: 100%" :row-class-name="rowClassName" :border="border" :span-method="spanMethod" :row-key="rowKey"
+      :default-expand-all="defaultExpandAll" @sort-change="sortChange" @selection-change="handleSelectionChange">
       <slot></slot>
 
       <!-- 如果启用多选，显示该列 -->
-      <el-table-column v-if="props.selection" type="selection" width="55" />
+      <el-table-column v-if="props.selection" type="selection" width="55" fixed="left" />
 
       <template v-for="(val, key, ind) in appColumns" :key="ind">
 
         <el-table-column v-if="val.show" :label="val.label" :prop="key" :align="val.align" :width="val.width"
           :min-width="val.minWidth" :sortable="val.sortable" :fixed="val.fixed" :type="val.type">
+
+          <template v-if="val.renderHeader" #header="scope">
+            <component :is="val.renderHeader"></component>
+          </template>
           <template #default="scope">
 
             <div v-if="val.show && val.type == 'datetime'">
               <span>{{
                   scope.row[scope.column.property] ?
-                    $moment(scope.row[scope.column.property]).format('YYYY-MM-DD HH:mm:ss') : ''
+                    moment(scope.row[scope.column.property]).format('YYYY-MM-DD HH:mm:ss') : ''
               }} </span>
             </div>
 
             <div v-else-if="val.show && val.type == 'date'">
               <span>{{
                   scope.row[scope.column.property] ?
-                    $moment(scope.row[scope.column.property]).format('YYYY-MM-DD') : ''
+                    moment(scope.row[scope.column.property]).format('YYYY-MM-DD') : ''
               }} </span>
             </div>
 
@@ -45,7 +49,9 @@
             </div>
 
             <div v-else>
-              <span>{{ val.render ? val.render(scope.row[scope.column.property]) : scope.row[scope.column.property] }}
+              <span>{{ val.render ? val.render(scope.row[scope.column.property], scope.row) :
+                  scope.row[scope.column.property]
+              }}
               </span>
             </div>
 
@@ -62,18 +68,18 @@
 
     </el-table>
     <div class="gva-pagination" v-if="isPaging">
-      <el-pagination layout="total, sizes, prev, pager, next, jumper" :current-page="paginationOpt.page"
-        :page-size="paginationOpt.pageSize" :page-sizes="[15, 30, 50, 100]" :total="paginationOpt.total"
-        @current-change="handleCurrentChange" @size-change="handleSizeChange" />
+      <el-pagination :small="props.size == 'small'" layout="total, sizes, prev, pager, next, jumper"
+        :current-page="paginationOpt.page" :page-size="paginationOpt.pageSize" :page-sizes="pageSizes"
+        :total="paginationOpt.total" @current-change="handleCurrentChange" @size-change="handleSizeChange" />
     </div>
   </div>
 </template>
 
 <script setup>
-
-import { ref, nextTick, onMounted } from 'vue'
+import { ref, nextTick, onMounted, h, markRaw } from 'vue'
 import axios from 'axios'
-import { initScoll } from './tableHeadScoll'
+import moment from 'moment'
+import { initScoll } from './tableHeadScoll.js'
 import { propsObj } from './props'
 import { useRouter, useRoute } from 'vue-router'
 import dialogTools from './dialogTools.vue'
@@ -82,7 +88,7 @@ defineOptions({
   name: 'BuTable',
 })
 const route = useRoute()
-const appColumns = ref({})
+let appColumns = {}
 
 //缓存中的列名
 let lsCol = localStorage.getItem('app-table-column_' + route.name.toLowerCase())
@@ -102,10 +108,10 @@ for (const key in t) {
     t[key].show = true
   }
 }
-appColumns.value = t
+appColumns = t
 
 //如果缓存中显示得字段为空 默认全选，因为是页面第一次使用，未设置过缓存
-if (lsCol.length == 0) colunmVisible.value = Object.keys(appColumns.value)
+if (lsCol.length == 0) colunmVisible.value = Object.keys(appColumns)
 
 
 // props
@@ -113,7 +119,11 @@ const props = defineProps(propsObj)
 //emits
 const emits = defineEmits(['sort-change', 'selection-change', 'response', 'request'])
 const sortChange = (e) => {
-  emits('sort-change', e)
+  if (e.column && e.column.sortable && e.column.sortable !== true) {
+    //如果是前段排序，就不用调下面这个
+    emits('sort-change', e)
+  }
+
 }
 
 
@@ -122,16 +132,17 @@ const loading = ref(false)
 const tableData = ref([])
 const paginationOpt = ref({
   page: 1,
-  pageSize: 15,
+  pageSize: props.pageSize ? props.pageSize : 15,
   total: 0
 })
+const pageSizes = ref([...props.pageSizes])
 
 /**
  * 当前页码改变
  */
 const handleCurrentChange = (val) => {
   paginationOpt.value.page = val
-  handleSearchTableData()
+  reload()
 }
 
 /**
@@ -139,7 +150,7 @@ const handleCurrentChange = (val) => {
  */
 const handleSizeChange = (val) => {
   paginationOpt.value.pageSize = val
-  handleSearchTableData()
+  reload()
 }
 /**
  * 多选改变
@@ -152,7 +163,7 @@ const handleSelectionChange = (e) => {
 /**
  * 获取table数据, reload:从第一页加载数据,如重置按钮 调用此方法时需要传true
  */
-const handleSearchTableData = async (reload = false) => {
+const reload = async (reload = false) => {
   if (
     props.apiData &&
     Array.isArray(props.apiData) &&
@@ -178,33 +189,78 @@ const handleSearchTableData = async (reload = false) => {
     requestConfig.data = tempP
   }
   loading.value = true
+  let res = await axios(requestConfig)
 
-  let { data: res } = await axios(requestConfig)
-  console.log('res', res);
   loading.value = false
-  tableData.value = res.data.list
-  paginationOpt.value.total = res.data.total
-  paginationOpt.value.page = res.data.page
-  paginationOpt.value.pageSize = res.data.pageSize
-  emits('response', res)
+
+  if (props.apiFilter) {
+    res = {}
+    res = props.apiFilter(res.data)
+  }
+  tableData.value = res.data.data.list || [] //这里要求一定是数组，但后端接口在未查到数据时有可能返回null
+
+  paginationOpt.value.total = res.data.data.total
+  paginationOpt.value.page = res.data.data.page
+  paginationOpt.value.pageSize = res.data.data.pageSize
+  emits('response', res.data)
   emits('request', tempP)
 }
 //对外暴露，使父组件可以用refs的方式调取到
 defineExpose({
-  handleSearchTableData
+  reload
 })
 
 //生命周期
 onMounted(async () => {
-  initScoll()
-  handleSearchTableData()
+  if (props.headerTopfixed) {
+    initScoll()
+  }
+
+  reload()
 })
+
+// const exportToExcel = () => {
+
+//     // 设置导出的内容是否只做解析，不进行格式转换     false：要解析， true:不解析
+//     const xlsxParam = { raw: true }
+//     const wb = XLSX.utils.table_to_book(document.querySelector('#oIncomTable'), xlsxParam)
+//     // 导出excel文件名
+//     let fileName = '价格缺货报表_' + moment(searchInfo.value.date).format('YYYY-MM-DD') + '.xlsx'
+
+//     const wbout = XLSX.write(wb, { bookType: 'xlsx', bookSST: true, type: 'array' })
+//     try {
+//         // 下载保存文件
+//         FileSaver.saveAs(new Blob([wbout], { type: 'application/octet-stream' }), fileName)
+//     } catch (e) {
+//         if (typeof console !== 'undefined') {
+//             console.log(e, wbout)
+//         }
+//     }
+// }
 </script>
 
 <style lang="scss" scoped>
 .app-table {
   .app-tools {
     margin: 0 0 10px 0;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
   }
+}
+
+:deep(.el-table) {
+  .danger-row {
+    background: #F56C6C;
+  }
+
+  .success-row {
+    background: #67C23A;
+  }
+
+  .warning-row {
+    background: #E6A23C;
+  }
+
 }
 </style>

@@ -1,8 +1,9 @@
 <template>
   <div class="bfox-kit-doc">
-    <aside class="bfox-kit-doc_sider">
+    <div class="bfox-kit-doc_sider">
+      <h4>BfoxUI</h4>
       <router-link v-for="(link, index) in data.links" :key="index" :to="link.path">{{ link.name }}</router-link>
-    </aside>
+    </div>
     <main>
       <router-view></router-view>
     </main>
@@ -44,13 +45,22 @@ const data = reactive({
     flex-direction: column;
 
     a {
-      margin: 5px;
       text-decoration: none;
+      padding: 7px 16px;
+      font-size: 13px;
       color: #606266;
+      background: #409eff1a;
+      margin: 2px 0;
+      border-radius: 5px;
 
       &:hover {
         color: #409eff
       }
+    }
+
+    a.is-active {
+      background-color: #409eff1a;
+      color: #409eff
     }
   }
 

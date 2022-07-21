@@ -16,5 +16,11 @@
     "compZhName": "表格",
     "compDesc": "表格",
     "compClassName": "bu-table"
+  },
+  {
+    "compName": "BuDialog",
+    "compZhName": "弹框",
+    "compDesc": "弹框",
+    "compClassName": "bu-dialog"
   }
 ]

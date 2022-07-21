@@ -28,7 +28,7 @@ export const propsObj = {
         type: String,
         default: 'get'
     },
-    /**重组接口返回的数据 */
+    /** 过滤接口返回的参数 */
     apiFilter: {
         type: Function,
     },
@@ -69,6 +69,25 @@ export const propsObj = {
         default: true
     },
     //------------------
+    showHeader: {
+        type: Boolean,
+        default: true
+    },
+    size: {
+        type: String,
+    },
+    /** 每页条数*/
+    pageSize: {
+        type: Number,
+        default: 15
+    },
+    /** 每页条数 下拉框*/
+    pageSizes: {
+        type: Array,
+        default: () => {
+            return [15, 30, 50, 100]
+        }
+    },
     //以下是原生属性
     rowKey: {
         type: String || Function,

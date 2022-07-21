@@ -1,5 +1,5 @@
 <template>
-  <div style="display: flex;justify-content: end;text-align: center;">
+  <div style="display: flex;justify-content: end;text-align: center;margin-left: auto;">
     <el-popover placement="left" :width="600" trigger="click">
       <template #reference>
         <el-icon :size="20" title="自定义列">
@@ -36,16 +36,16 @@ const emits = defineEmits(['input'])
 const route = useRoute()
 const colunmVisible = ref([])
 const props = defineProps({
-  modelValue: {
+  colunmVisible: {
     type: Array,
     default: () => {
       return []
     }
   },
   columns: {
-    type: Array,
+    type: Object,
     default: () => {
-      return []
+      return {}
     }
   }
 })
@@ -67,12 +67,9 @@ const handleRestDiyColumn = () => {
 const handleAllDiyColumn = () => {
   colunmVisible.value = Object.keys(props.columns)
 }
-watch(colunmVisible, (e, k) => {
-  console.log(e, k)
-  emits('update:modelValue', e)
-})
+
 onMounted(() => {
-  colunmVisible.value = props.modelValue
+  colunmVisible.value = [...props.colunmVisible]
 })
 </script>
 

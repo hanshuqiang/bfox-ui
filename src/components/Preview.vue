@@ -57,6 +57,7 @@ export default {
             /* @vite-ignore */ `../../packages/components/${this.compName}/docs/${this.demoName}.vue?raw`
           )
         ).default
+     
       } else {
         this.sourceCode = await fetch(`${isDev ? '' : ''}/packages/components/${this.compName}/docs/${this.demoName}.vue`
         ).then((res) => res.text())
@@ -90,13 +91,11 @@ pre {
   section {
     margin: 15px;
   }
-
   .source-code {
     max-height: 500px;
   }
-
   .language-html {
-    margin: 0;
+    margin: 10px 0;
     padding: 0 15px;
   }
 
@@ -106,6 +105,9 @@ pre {
     justify-content: center;
     align-items: center;
     border-top: 1px dashed #e7e7e7;
+    span{
+      cursor: pointer;
+    }
   }
 }
 </style>

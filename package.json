@@ -5,6 +5,7 @@
   "description": "bfox-ui",
   "scripts": {
     "dev": "vite --config ./build/base.config.ts",
+    "build":"npm run build:doc && npm run build:lib",
     "build:doc": "vue-tsc --noEmit && vite build --config ./build/doc.config.ts && node script/copyDir.js",
     "build:lib": "vue-tsc --noEmit && vite build --config ./build/lib.config.ts",
     "gen": "node ./script/genNewComp/index.js"

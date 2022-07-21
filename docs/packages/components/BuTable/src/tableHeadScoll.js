@@ -1,4 +1,4 @@
-import { nextTick } from 'vue'
+
 const ishowBottomDiv = (bottomDiv, scrollBar, tableBodyDomWrap) => {
     if (bottomDiv.getBoundingClientRect().top > document.body.clientHeight) {
         if (scrollBar.style.display === 'none') {
@@ -16,34 +16,32 @@ const init = (top, zIndex) => {
     let scrollBar = document.createElement('div')
     let tableBodyDom = document.querySelector('.el-table__body')
     let tableBodyDomWrap = document.querySelector('.el-table__body-wrapper')
-    nextTick(() => {
-        let dom = document.querySelector('.el-table')
-        if (!dom) {
-            return
-        }
-        dom.append(bottomDiv)
-        let MutationObserver =
-            window.MutationObserver ||
-            window.webkitMutationObserver ||
-            window.MozMutationObserver
-        window.mutationObserver = new MutationObserver(function (mutations) {
-            ishowBottomDiv(bottomDiv, scrollBar, tableBodyDomWrap)
-        })
-        window.mutationObserver.observe(dom, {
-            childList: true,
-            subtree: true // 子节点的变动（新增、删除或者更改）
-        })
-        bar.style.width = tableBodyDom.getBoundingClientRect().width + 'px'
-        bar.style.height = '1px'
-        scrollBar.style.width = dom.getBoundingClientRect().width + 'px'
-        scrollBar.style.height = '30px'
-        scrollBar.style.overflow = 'auto'
-        scrollBar.style.zIndex = zIndex
-        scrollBar.style.bottom = '0px'
-        scrollBar.style.position = 'fixed'
-        scrollBar.append(bar)
-        dom.append(scrollBar)
+    let dom = document.querySelector('.el-table')
+    if (!dom) {
+        return
+    }
+    dom.append(bottomDiv)
+    let MutationObserver =
+        window.MutationObserver ||
+        window.webkitMutationObserver ||
+        window.MozMutationObserver
+    window.mutationObserver = new MutationObserver(function (mutations) {
+        ishowBottomDiv(bottomDiv, scrollBar, tableBodyDomWrap)
     })
+    window.mutationObserver.observe(dom, {
+        childList: true,
+        subtree: true // 子节点的变动（新增、删除或者更改）
+    })
+    bar.style.width = tableBodyDom.getBoundingClientRect().width + 'px'
+    bar.style.height = '1px'
+    scrollBar.style.width = dom.getBoundingClientRect().width + 'px'
+    scrollBar.style.height = '30px'
+    scrollBar.style.overflow = 'auto'
+    scrollBar.style.zIndex = zIndex
+    scrollBar.style.bottom = '0px'
+    scrollBar.style.position = 'fixed'
+    scrollBar.append(bar)
+    dom.append(scrollBar)
     window.addEventListener(
         'scroll',
         () => {
