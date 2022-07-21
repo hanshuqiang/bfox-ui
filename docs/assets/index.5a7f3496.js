@@ -1,0 +1,1 @@
+import{_ as e}from"./index.cceb6ff4.js";import{o as t,c as a,F as o,g as n,b as r}from"./vendor.a221e204.js";const s={},c=n(" home github : "),i=r("a",{href:"https://hanpanapn.github.io/bfox-ui/#/",target:"_blank"},"https://hanpanapn.github.io/bfox-ui/#/",-1);function _(f,h){return t(),a(o,null,[c,i],64)}var u=e(s,[["render",_]]);export{u as default};

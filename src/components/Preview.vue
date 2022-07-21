@@ -51,9 +51,17 @@ export default {
   },
   async mounted() {
     if (this.compName && this.demoName) {
-      console.log('isdev',isDev);
-       this.sourceCode = await fetch(`${isDev ? '' : ''}/packages/components/${this.compName}/docs/${this.demoName}.vue`
+      
+      if (isDev) {
+        this.sourceCode = (
+          await import(
+            /* @vite-ignore */ `../../packages/components/${this.compName}/docs/${this.demoName}.vue?raw`
+          )
+        ).default
+      } else {
+        this.sourceCode = await fetch(`${isDev ? '' : ''}/packages/components/${this.compName}/docs/${this.demoName}.vue`
         ).then((res) => res.text())
+      }
     }
     await this.$nextTick()
     Prism.highlightAll()

@@ -11,7 +11,7 @@ import demo from './demo.vue'
 复制文字
 
 ## 基础用法
-<Preview comp-name="Clipboard" demo-name="demo">
+<Preview comp-name="BuClipboard" demo-name="demo">
   <demo />
 </Preview>
 

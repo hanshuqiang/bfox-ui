@@ -6,10 +6,10 @@
     "compClassName": "button"
   },
   {
-    "compName": "Clipboard",
+    "compName": "BuClipboard",
     "compZhName": "复制组件",
     "compDesc": "复制文字",
-    "compClassName": "clipboard"
+    "compClassName": "bu-clipboard"
   },
   {
     "compName": "BuTable",

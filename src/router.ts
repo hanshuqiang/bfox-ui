@@ -28,9 +28,9 @@
     component: () => import('packages/components/Button/docs/README.md'),
   },{
     title: '复制组件',
-    name: 'Clipboard',
-    path: '/components/Clipboard',
-    component: () => import('packages/components/Clipboard/docs/README.md'),
+    name: 'BuClipboard',
+    path: '/components/BuClipboard',
+    component: () => import('packages/components/BuClipboard/docs/README.md'),
   },{
     title: '表格',
     name: 'BuTable',
