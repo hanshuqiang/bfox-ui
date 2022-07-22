@@ -1,24 +1,26 @@
 {
   "name": "bfox-ui",
-  "version": "2.0.15",
-  "main": "dist/bfox-kit.umd.js",
+  "version": "2.0.18",
+  "main": "dist/bfox-ui.umd.js",
   "description": "bfox-ui",
   "scripts": {
     "dev": "vite --config ./build/base.config.ts",
-    "build":"npm run build:doc && npm run build:lib",
+    "build": "npm run build:doc && npm run build:lib",
     "build:doc": "vue-tsc --noEmit && vite build --config ./build/doc.config.ts && node script/copyDir.js",
     "build:lib": "vue-tsc --noEmit && vite build --config ./build/lib.config.ts",
     "gen": "node ./script/genNewComp/index.js"
   },
   "dependencies": {
-    "axios": "^0.27.2",
     "@element-plus/icons-vue": "^0.2.7",
+    "axios": "^0.27.2",
     "element-plus": "^2.0.1",
+    "md5": "^2.3.0",
     "moment": "^2.29.3",
     "prismjs": "^1.25.0",
+    "uuid": "^8.3.2",
     "vue": "^3.2.23",
-    "vue-router": "^4.0.12",
-    "vue-clipboard3": "^2.0.0"
+    "vue-clipboard3": "^2.0.0",
+    "vue-router": "^4.0.12"
   },
   "devDependencies": {
     "@types/node": "^16.11.41",
@@ -28,7 +30,6 @@
     "handlebars": "^4.7.7",
     "inquirer": "^8.2.0",
     "less": "^4.1.2",
-    "webpack":"^5.0.0",
     "node-sass": "^7.0.1",
     "sass": "^1.52.3",
     "sass-loader": "^13.0.0",
@@ -38,8 +39,8 @@
     "vite-plugin-copy": "^0.1.6",
     "vite-plugin-dts": "^0.9.6",
     "vite-plugin-md": "^0.11.4",
-    
-    "vue-tsc": "^0.28.10"
+    "vue-tsc": "^0.28.10",
+    "webpack": "^5.0.0"
   },
   "keywords": [],
   "author": "hanpanpan",
