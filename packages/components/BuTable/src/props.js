@@ -32,6 +32,15 @@ export const propsObj = {
     apiFilter: {
         type: Function,
     },
+    apiHeaders: {
+        type: Object,
+        default: () => {
+            return {
+                'x-token': localStorage.getItem('token'),
+                'x-user-id': 1
+            }
+        }
+    },
     //自定义列
     columns: {
         type: Object,

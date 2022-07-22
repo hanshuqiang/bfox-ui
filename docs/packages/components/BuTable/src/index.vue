@@ -1,12 +1,13 @@
 <template>
-  <div class="app-table">
-    <div class="app-tools">
+  <div :id="'box-' + tableUUID" class="bu-table">
+    <div class="bu-tools">
       <slot name="tools"></slot>
       <dialogTools v-if="props.customColumn" title="自定义显示列" :colunmVisible="colunmVisible" :columns="props.columns" />
     </div>
-    <el-table :fit="fit" :size="props.size" :show-header="props.showHeader" v-loading="loading" :data="tableData"
-      style="width: 100%" :row-class-name="rowClassName" :border="border" :span-method="spanMethod" :row-key="rowKey"
-      :default-expand-all="defaultExpandAll" @sort-change="sortChange" @selection-change="handleSelectionChange">
+    <el-table :id="tableUUID" :fit="fit" :size="props.size" :show-header="props.showHeader" v-loading="loading"
+      :data="tableData" style="width: 100%" :row-class-name="rowClassName" :border="border" :span-method="spanMethod"
+      :row-key="rowKey" :default-expand-all="defaultExpandAll" @sort-change="sortChange"
+      @selection-change="handleSelectionChange">
       <slot></slot>
 
       <!-- 如果启用多选，显示该列 -->
@@ -76,54 +77,65 @@
 </template>
 
 <script setup>
-import { ref, nextTick, onMounted, h, markRaw } from 'vue'
+import { ref, nextTick, onMounted, h, markRaw, reactive } from 'vue'
 import axios from 'axios'
 import moment from 'moment'
 import { initScoll } from './tableHeadScoll.js'
 import { propsObj } from './props'
 import { useRouter, useRoute } from 'vue-router'
 import dialogTools from './dialogTools.vue'
-
+import md5 from 'md5'
+import { v4 as uuidv4 } from 'uuid'
 defineOptions({
   name: 'BuTable',
 })
-  const route = useRoute()
-  console.log('route1',route);
+const tableUUID = ref('tid_' + uuidv4())
+// props
+const props = defineProps(propsObj)
+//emits
+const emits = defineEmits(['sort-change', 'selection-change', 'response', 'request'])
+
+
+const appColumns = ref({})
+const colunmVisible = ref([])
+//route在其他项目安装的时候获取不到，所以当前页面标识用url取md5 和bu-table-column_ 拼接
+// const route = useRoute()
 if (props.customColumn) {
-
-  let appColumns = {}
-
   //缓存中的列名
-  let lsCol = localStorage.getItem('app-table-column_' + route.name.toLowerCase())
+  // let lsCol = localStorage.getItem('bu-table-column_' + route.name.toLowerCase()) 
+  let routeName = md5(location.href)
+
+  let lsCol = localStorage.getItem('bu-table-column_' + routeName)
 
   try {
     lsCol = lsCol ? JSON.parse(lsCol) : []
   } catch (error) {
     lsCol = Object.keys(props.columns)
   }
-  const colunmVisible = ref(lsCol)
+  colunmVisible.value = lsCol
   //取出当前路由下，展示的table 列，如果没有，就使用props 传过来的列
   let t = Object.assign({}, props.columns)
+
+
   for (const key in t) {
+
     if (Object.hasOwnProperty.call(t, key) && Array.isArray(lsCol) && lsCol.length > 0) {
       t[key].show = lsCol.indexOf(key) != -1
     } else {
       t[key].show = true
     }
+
   }
-  appColumns = t
+  appColumns.value = t
+
   //如果缓存中显示得字段为空 默认全选，因为是页面第一次使用，未设置过缓存
-  if (lsCol.length == 0) colunmVisible.value = Object.keys(appColumns)
+  if (lsCol.length == 0) colunmVisible.value = Object.keys(appColumns.value)
+
+
 }
 
 
 
-
-
-// props
-const props = defineProps(propsObj)
-//emits
-const emits = defineEmits(['sort-change', 'selection-change', 'response', 'request'])
 const sortChange = (e) => {
   if (e.column && e.column.sortable && e.column.sortable !== true) {
     //如果是前段排序，就不用调下面这个
@@ -181,10 +193,7 @@ const reload = async (reload = false) => {
   let requestConfig = {
     url: props.apiUrl,
     method: props.apiMethod,
-    headers:{
-      'x-token':localStorage.getItem('token'),
-      'x-user-id': 1
-    }
+    headers: props.apiHeaders
   }
   let tempP = {
     ...props.apiParams()
@@ -223,7 +232,7 @@ defineExpose({
 //生命周期
 onMounted(async () => {
   if (props.headerTopfixed) {
-    initScoll()
+    initScoll(tableUUID.value)
   }
 
   reload()
@@ -250,8 +259,12 @@ onMounted(async () => {
 </script>
 
 <style lang="scss" scoped>
-.app-table {
-  .app-tools {
+.bu-table {
+  padding: 15px 15px 0 15px;
+  background: white;
+  border-radius: 5px;
+
+  .bu-tools {
     margin: 0 0 10px 0;
     display: flex;
     justify-content: flex-start;

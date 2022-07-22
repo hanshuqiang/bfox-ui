@@ -1,6 +1,6 @@
 <template>
-  <div class="bfox-kit-doc">
-    <div class="bfox-kit-doc_sider">
+  <div class="bfox-ui-doc">
+    <div class="bfox-ui-doc_sider">
       <h4>BfoxUI</h4>
       <router-link v-for="(link, index) in data.links" :key="index" :to="link.path">{{ link.name }}</router-link>
     </div>
@@ -33,7 +33,7 @@ const data = reactive({
 </script>
 
 <style lang="less">
-.bfox-kit-doc {
+.bfox-ui-doc {
   display: flex;
   min-height: 100vh;
 

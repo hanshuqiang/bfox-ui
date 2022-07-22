@@ -12,7 +12,7 @@
           </el-col>
 
           <el-col :span="24">
-            <el-button style="padding: 5px 9px;   height: unset;" type="success" @click="handleSaveDiyColumn">保存
+            <el-button style="padding: 5px 9px;   height: unset;" type="success" @click="handleSaveDiyColumn">1保存
             </el-button>
             <el-button style="padding: 5px 9px;   height: unset;" type="info" @click="handleRestDiyColumn">重置
             </el-button>
@@ -29,9 +29,11 @@
 
 <script setup>
 import { onMounted, ref, watch } from 'vue'
-import { useRouter, useRoute } from 'vue-router'
+import md5 from 'md5'
+let routeName = md5(location.href)
+// import { useRouter, useRoute } from 'vue-router'
 const emits = defineEmits(['input'])
-const route = useRoute()
+// const route = useRoute()
 const colunmVisible = ref([])
 const props = defineProps({
   colunmVisible: {
@@ -48,8 +50,9 @@ const props = defineProps({
   }
 })
 const handleSaveDiyColumn = () => {
+  
   localStorage.setItem(
-    'app-table-column_' + route.name.toLowerCase(),
+    'by-table-column_' + routeName,
     JSON.stringify(colunmVisible.value)
   )
   window.location.reload()
@@ -57,7 +60,7 @@ const handleSaveDiyColumn = () => {
 const handleRestDiyColumn = () => {
   colunmVisible.value = []
   localStorage.removeItem(
-    'app-table-column_' + route.name.toLowerCase(),
+    'bu-table-column_' + routeName,
 
   )
   window.location.reload()
@@ -68,6 +71,7 @@ const handleAllDiyColumn = () => {
 
 onMounted(() => {
   colunmVisible.value = [...props.colunmVisible]
+ 
 })
 </script>
 

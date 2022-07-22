@@ -10,13 +10,14 @@ const ishowBottomDiv = (bottomDiv, scrollBar, tableBodyDomWrap) => {
         scrollBar.style.display = 'none'
     }
 }
-const init = (top, zIndex) => {
+const init = (tableID, top, zIndex) => {
     let bottomDiv = document.createElement('div')
     let bar = document.createElement('div')
     let scrollBar = document.createElement('div')
-    let tableBodyDom = document.querySelector('.el-table__body')
-    let tableBodyDomWrap = document.querySelector('.el-table__body-wrapper')
-    let dom = document.querySelector('.el-table')
+    let tableBodyDom = document.querySelector("#" + tableID).querySelector('.el-table__body')
+    let tableBodyDomWrap = document.querySelector("#" + tableID).querySelector('.el-table__body-wrapper')
+    let dom = document.querySelector("#" + tableID)
+     
     if (!dom) {
         return
     }
@@ -45,7 +46,7 @@ const init = (top, zIndex) => {
     window.addEventListener(
         'scroll',
         () => {
-            let dom = document.querySelector('.el-table')
+            let dom = document.querySelector("#" + tableID)
             if (!dom) {
                 return
             }
@@ -55,18 +56,12 @@ const init = (top, zIndex) => {
                 scrollBar.scrollLeft = tableBodyDomWrap.scrollLeft
             }
             ishowBottomDiv(bottomDiv, scrollBar, tableBodyDomWrap)
-            let elTable = document.querySelector('.el-table__header-wrapper')
-            let elTableFixed = document.querySelector(
-                '.el-table__fixed .el-table__fixed-header-wrapper'
-            )
-            let elTableFixedRight = document.querySelector(
-                '.el-table__fixed-right .el-table__fixed-header-wrapper'
-            )
-            let elTableFixedRightHeader = document.querySelector(
-                '.el-table__fixed-right  .el-table__header'
-            )
+            let elTable = document.querySelector("#" + tableID).querySelector('.el-table__header-wrapper')
+            let elTableFixed = document.querySelector("#" + tableID).querySelector('.el-table__fixed .el-table__fixed-header-wrapper')
+            let elTableFixedRight = document.querySelector("#" + tableID).querySelector('.el-table__fixed-right .el-table__fixed-header-wrapper')
+            let elTableFixedRightHeader = document.querySelector("#" + tableID).querySelector('.el-table__fixed-right  .el-table__header')
             if (dom.getBoundingClientRect().top < top) {
-                if (document.querySelector('.zhanweitablehead')) {
+                if (document.querySelector("#" + tableID).querySelector('.zhanweitablehead')) {
                     //
                 } else {
                     let zhanwei = document.createElement('div')
@@ -95,9 +90,7 @@ const init = (top, zIndex) => {
                     elTableFixed.style.overflow = 'hidden'
                 }
                 if (elTableFixedRight) {
-                    elTableFixedRight.style.width = document.querySelector(
-                        '.el-table__fixed-right'
-                    ).style.width
+                    elTableFixedRight.style.width = document.querySelector("#" + tableID).querySelector('.el-table__fixed-right').style.width
                     elTableFixedRight.style.position = 'fixed'
                     elTableFixedRight.style.zIndex = zIndex
                     elTableFixedRight.style.top = top + 'px'
@@ -111,10 +104,8 @@ const init = (top, zIndex) => {
                 if (!dom) {
                     return
                 }
-                if (document.querySelector('.zhanweitablehead')) {
-                    document
-                        .querySelector('.el-table')
-                        .removeChild(document.querySelector('.zhanweitablehead'))
+                if (document.querySelector("#" + tableID).querySelector('.zhanweitablehead')) {
+                    document.querySelector("#" + tableID).removeChild(document.querySelector("#" + tableID).querySelector('.zhanweitablehead'))
                 }
                 if (elTable) elTable.style = {}
                 if (elTableFixed) elTableFixed.style = {}
@@ -127,6 +118,6 @@ const init = (top, zIndex) => {
     )
 }
 
-export const initScoll = (opt = { top: 100, zIndex: 997 }) => {
-    init(opt.top, opt.zIndex)
+export const initScoll = (tableID, opt = { top: 100, zIndex: 997 }) => {
+    init(tableID, opt.top, opt.zIndex)
 }

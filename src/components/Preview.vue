@@ -51,7 +51,7 @@ export default {
     previewSourceCode() {
       return this.sourceCode.replace(
         /'\.\.\/\.\.\/index'/g,
-        `'@tencent/bfox-kit'`
+        `'@tencent/bfox-ui'`
       )
     }
   },
