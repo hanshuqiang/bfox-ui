@@ -87,31 +87,36 @@ import dialogTools from './dialogTools.vue'
 defineOptions({
   name: 'BuTable',
 })
-const route = useRoute()
-let appColumns = {}
+  const route = useRoute()
+if (props.customColumn) {
 
-//缓存中的列名
-let lsCol = localStorage.getItem('app-table-column_' + route.name.toLowerCase())
+  let appColumns = {}
 
-try {
-  lsCol = lsCol ? JSON.parse(lsCol) : []
-} catch (error) {
-  lsCol = Object.keys(props.columns)
-}
-const colunmVisible = ref(lsCol)
-//取出当前路由下，展示的table 列，如果没有，就使用props 传过来的列
-let t = Object.assign({}, props.columns)
-for (const key in t) {
-  if (Object.hasOwnProperty.call(t, key) && Array.isArray(lsCol) && lsCol.length > 0) {
-    t[key].show = lsCol.indexOf(key) != -1
-  } else {
-    t[key].show = true
+  //缓存中的列名
+  let lsCol = localStorage.getItem('app-table-column_' + route.name.toLowerCase())
+
+  try {
+    lsCol = lsCol ? JSON.parse(lsCol) : []
+  } catch (error) {
+    lsCol = Object.keys(props.columns)
   }
+  const colunmVisible = ref(lsCol)
+  //取出当前路由下，展示的table 列，如果没有，就使用props 传过来的列
+  let t = Object.assign({}, props.columns)
+  for (const key in t) {
+    if (Object.hasOwnProperty.call(t, key) && Array.isArray(lsCol) && lsCol.length > 0) {
+      t[key].show = lsCol.indexOf(key) != -1
+    } else {
+      t[key].show = true
+    }
+  }
+  appColumns = t
+  //如果缓存中显示得字段为空 默认全选，因为是页面第一次使用，未设置过缓存
+  if (lsCol.length == 0) colunmVisible.value = Object.keys(appColumns)
 }
-appColumns = t
 
-//如果缓存中显示得字段为空 默认全选，因为是页面第一次使用，未设置过缓存
-if (lsCol.length == 0) colunmVisible.value = Object.keys(appColumns)
+
+
 
 
 // props
@@ -174,7 +179,11 @@ const reload = async (reload = false) => {
   }
   let requestConfig = {
     url: props.apiUrl,
-    method: props.apiMethod
+    method: props.apiMethod,
+    headers:{
+      'x-token':localStorage.getItem('token'),
+      'x-user-id': 1
+    }
   }
   let tempP = {
     ...props.apiParams()
