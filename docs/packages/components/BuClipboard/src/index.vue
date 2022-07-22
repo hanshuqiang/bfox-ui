@@ -27,12 +27,16 @@
 import { ref } from 'vue'
 import useClipboard from 'vue-clipboard3'
 import { ElMessage } from 'element-plus'
+import { useRouter, useRoute } from 'vue-router'
 const props = defineProps({
   text: {
     type: String,
     default: ''
   }
 })
+const route = useRoute()
+console.log('luyou',route);
+
 const showTip = ref(false)
 
 const { toClipboard } = useClipboard()

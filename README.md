@@ -1,3 +1,10 @@
+## 本地运行
+
+```
+yarn
+npm run dev
+```
+
 ## NPM 包发布流程
 
 登录npmjs.com(在根路径下执行)

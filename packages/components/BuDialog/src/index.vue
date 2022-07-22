@@ -24,7 +24,7 @@
 </template>
 
 <script lang="ts" setup>
-import { analyzeMetafile } from 'esbuild';
+ 
 import { ref, onMounted } from 'vue'
 defineOptions({
   name: 'BuDialog',
