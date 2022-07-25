@@ -15,6 +15,8 @@ import demo from './demo.vue'
   <demo />
 </Preview>
 
+<div class="prev_table">
+
 ## 属性
 参数 | 说明 | 类型 | 可选值 | 默认值 | 是否必填
 :-: | :-: | :-: | :-: | :-: | :-:
@@ -28,4 +30,8 @@ import demo from './demo.vue'
 `close` | 弹框关闭事件 | e | true or false 可以用于是否刷新父列表页
 
 ## 插槽
+
+</div>
+
+
 

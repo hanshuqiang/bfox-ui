@@ -4,7 +4,7 @@
       <slot></slot>
     </section>
 
-   
+
 
 
 
@@ -12,11 +12,11 @@
       <span name="Code" @click="showSourceCode">查看代码</span>
     </div>
 
-     <transition name="el-fade-in-linear">
+    <el-collapse-transition>
       <div v-show="codeVisible" class="source-code">
         <pre class="language-html"><code class="language-html">{{ previewSourceCode }}</code></pre>
       </div>
-    </transition>
+    </el-collapse-transition>
   </div>
 </template>
 
@@ -100,6 +100,7 @@ pre {
 
   .source-code {
     max-height: 500px;
+
   }
 
   .language-html {

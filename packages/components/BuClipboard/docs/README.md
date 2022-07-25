@@ -15,6 +15,9 @@ import demo from './demo.vue'
   <demo />
 </Preview>
 
+
+<div class="prev_table">
+
 ## 属性
 参数 | 说明 | 类型 | 可选值 | 默认值 | 是否必填
 :-: | :-: | :-: | :-: | :-: | :-:
@@ -26,3 +29,8 @@ import demo from './demo.vue'
 :-: | :-: | :-: | :-:
 `click` | 点击事件 | $event | 原生的 dom event
 `customEvent` | 自定义事件 | [a, b, c] | a：参数一；b：参数二；c：参数三
+
+
+
+</div>
+
