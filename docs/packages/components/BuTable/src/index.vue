@@ -15,8 +15,8 @@
 
       <template v-for="(val, key, ind) in appColumns" :key="ind">
 
-        <el-table-column v-if="val.show" :label="val.label" :prop="key" :align="val.align" :width="val.width"
-          :min-width="val.minWidth" :sortable="val.sortable" :fixed="val.fixed" :type="val.type">
+        <el-table-column v-if="val.show" :label="val.label" :prop="key" :align="val.align" :width="val.width" :minWidth="val.minWidth?val.minWidth:val.width"
+           :sortable="val.sortable" :fixed="val.fixed" :type="val.type">
 
           <template v-if="val.renderHeader" #header="scope">
             <component :is="val.renderHeader"></component>
@@ -112,6 +112,7 @@ if (props.customColumn) {
   } catch (error) {
     lsCol = Object.keys(props.columns)
   }
+  console.log('lsCol',routeName,lsCol);
   colunmVisible.value = lsCol
   //取出当前路由下，展示的table 列，如果没有，就使用props 传过来的列
   let t = Object.assign({}, props.columns)
