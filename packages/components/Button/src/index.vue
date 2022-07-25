@@ -20,10 +20,11 @@ defineEmits(['click'])
 .bfox-button {
   appearance: none;
   padding: 5px 10px;
-  background: lightskyblue;
+  background: #409EFF;
   border: none;
   border-radius: 4px;
   color: #fff;
+  cursor: pointer;
 
   &:active {
     background: rgb(92, 185, 243);
