@@ -13,6 +13,7 @@ import demo2 from './demo2.vue'
 
 ## 基础用法
 
+
 基础用法中不含自定义列表功能
 
 <Preview comp-name="BuTable" demo-name="demo">

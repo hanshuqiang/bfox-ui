@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="markdown-body">
         <h1>安装</h1>
         <h2>环境支持</h2>
         <p>
