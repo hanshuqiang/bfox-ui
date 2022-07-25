@@ -94,9 +94,7 @@ pre {
   padding: 10px 10px 0 10px;
   border-bottom: 1px dashed #e7e7e7;
 
-  section {
-    margin: 15px;
-  }
+  section {}
 
   .source-code {
     max-height: 500px;
@@ -114,6 +112,7 @@ pre {
     justify-content: center;
     align-items: center;
     border-top: 1px dashed #e7e7e7;
+    margin-top: 20px;
 
     span {
       cursor: pointer;

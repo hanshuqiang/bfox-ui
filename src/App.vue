@@ -137,6 +137,7 @@ const data = reactive({
       th {
         border: 1px solid rgb(235, 238, 245);
         padding: 9px;
+        text-align: left !important;
       }
     }
 
