@@ -23,7 +23,7 @@ const columns = {
   },
   UpdatedAt: {
     type: 'datetime',
-    label: '更新时间',
+    label: '更新时间1',
     align: 'left',
     minWidth: '180px',
     sortable: 'custom'
@@ -32,6 +32,7 @@ const columns = {
     type: 'default',
     label: 'Name',
     align: 'left',
+    minWidth:'180px',
     width: '180px',
 
   },
