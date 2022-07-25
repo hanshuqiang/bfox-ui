@@ -1,7 +1,7 @@
 <template>
   <div class="bfox-ui-doc">
     <div class="bfox-ui-doc_sider">
-      <h4>BfoxUI</h4>
+      <h4><img class="logo"   src="./assets/logo.png" alt=""></h4>
       <router-link @click="handleClickMenu(link.path)" :class="curActive == link.path ? 'is-active' : ''"
         v-for="(link, index) in data.links" :key="index" :to="link.path">{{ link.name }}
       </router-link>
@@ -61,11 +61,16 @@ const data = reactive({
     display: flex;
     flex-direction: column;
 
-    background-image: linear-gradient(#e66465, #9198e5);
+    background-image: linear-gradient(#241c6d, #2d379c, #2e5c95, #2a6d9d, #1d4283 ); //#160e59  #18217e  1c5191 195b8b 1d4283
     box-shadow: 2px 10px 30px 0px rgb(0 0 0 / 26%), 0 4px 25px 0px rgb(0 0 0 / 12%), 0 8px 10px -5px rgb(0 0 0 / 20%);
 
     h4 {
-      color: white
+      color: white;
+      margin: 0;
+      .logo{
+        margin:0 0 0 15px;
+        width:150px;
+      }
     }
 
     a {
@@ -75,7 +80,7 @@ const data = reactive({
       font-size: 13px;
       // color: #606266;
       color: white;
-      background: #409eff1a;
+      background: #d7e5f33b;
     
       border-radius: 5px;
       min-width: 100px;
@@ -83,13 +88,13 @@ const data = reactive({
 
       &:hover {
         // color: #409eff
-        background-color: #ffffff26;
+        background-color: #eac5c566;
         box-shadow: 3px 4px 9px 2px #ffffff26;
       }
     }
 
     a.is-active {
-      background-color: #ffffff4d;
+      background-color: #ffffff94;
       box-shadow: 3px 4px 9px 2px #ffffff26;
     }
   }

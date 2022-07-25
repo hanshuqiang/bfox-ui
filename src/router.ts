@@ -13,13 +13,13 @@
     title: '首页',
     name: 'Home',
     path: '/',
-    component: () => import('./index.vue'),
+    component: () => import('./components/Index.vue'),
   },
   {
     title: '快速开始',
     name: 'Install',
     path: '/install',
-    component: () => import('./install/index.vue'),
+    component: () => import('./components/Install.vue'),
   },
   {
     title: '按钮',
