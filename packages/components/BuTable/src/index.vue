@@ -15,8 +15,8 @@
 
       <template v-for="(val, key, ind) in appColumns" :key="ind">
 
-        <el-table-column v-if="val.show" :label="val.label" :prop="key" :align="val.align" :width="val.width" :minWidth="val.minWidth?val.minWidth:val.width"
-           :sortable="val.sortable" :fixed="val.fixed" :type="val.type">
+        <el-table-column v-if="val.show" :label="val.label" :prop="key" :align="val.align" :width="val.width"
+          :minWidth="val.minWidth ? val.minWidth : val.width" :sortable="val.sortable" :fixed="val.fixed" :type="val.type">
 
           <template v-if="val.renderHeader" #header="scope">
             <component :is="val.renderHeader"></component>
@@ -112,7 +112,7 @@ if (props.customColumn) {
   } catch (error) {
     lsCol = Object.keys(props.columns)
   }
-  console.log('lsCol',routeName,lsCol);
+  console.log('lsCol', routeName, lsCol);
   colunmVisible.value = lsCol
   //取出当前路由下，展示的table 列，如果没有，就使用props 传过来的列
   let t = Object.assign({}, props.columns)
@@ -209,6 +209,8 @@ const reload = async (reload = false) => {
     requestConfig.data = tempP
   }
   loading.value = true
+  // 每次查询前清空表格数据
+  tableData.value = []
   let res = await axios(requestConfig)
 
   loading.value = false
@@ -217,11 +219,13 @@ const reload = async (reload = false) => {
     res = {}
     res = props.apiFilter(res.data)
   }
-  tableData.value = res.data.data.list || [] //这里要求一定是数组，但后端接口在未查到数据时有可能返回null
+  if (res.data && res.data.data) {
+    tableData.value = res.data.data.list || [] //这里要求一定是数组，但后端接口在未查到数据时有可能返回null
+    paginationOpt.value.total = res.data.data.total
+    paginationOpt.value.page = res.data.data.page
+    paginationOpt.value.pageSize = res.data.data.pageSize
+  }
 
-  paginationOpt.value.total = res.data.data.total
-  paginationOpt.value.page = res.data.data.page
-  paginationOpt.value.pageSize = res.data.data.pageSize
   emits('response', res.data)
   emits('request', tempP)
 }
@@ -261,7 +265,7 @@ onMounted(async () => {
 
 <style lang="scss" scoped>
 .bu-table {
-  
+
   background: white;
   border-radius: 5px;
 

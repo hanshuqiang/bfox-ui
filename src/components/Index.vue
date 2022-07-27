@@ -23,22 +23,14 @@
 import { ref } from 'vue';
 const logList = ref([
     {
-        date: '2020-01-12',
+        date: '2022-07-27',
         description: [
-            '[bug]表头浮动bug修改',
-            '[bug]表头浮动bug修改',
+            '[bug]修复table组件当接口返回null时报错的bug',
+            '[bug]修复table组件查不到数据时，表格数据未清空的bug',
             '[bug]表头浮动bug修改',
         ]
     },
-    {
-        date: '2020-01-13',
-       
-         description: [
-            '[bug]表头浮动bug修改',
-            '[bug]表头浮动bug修改',
-            '[bug]表头浮动bug修改',
-        ]
-    }
+    
 ])
 </script>
 

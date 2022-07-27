@@ -1,7 +1,7 @@
 <template>
   <div>
-    <bu-table :headerTopfixed="false"  apiUrl="/packages/components/BuTable/src/mock.json" ref="table" apiMethod="get" :apiParams="getParams"
-      :columns="columns" @sort-change="sortChange" :isPaging="true" :selection="false" :customColumn="true">
+    <bu-table :headerTopfixed="true"  apiUrl="/packages/components/BuTable/src/mock.json" ref="table" apiMethod="get" :apiParams="getParams"
+      :columns="columns" @sort-change="sortChange" :isPaging="false" :selection="false" :customColumn="true">
       <template #Action="scope">
         <bu-button>详情</bu-button>
       </template>
