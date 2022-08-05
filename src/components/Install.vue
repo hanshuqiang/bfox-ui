@@ -47,7 +47,8 @@ $ yarn add element-plus
     </code>
          </pre>
 
-
+    <h1>感谢</h1>
+    <p>本项目是参考jrainlau 的 MY-Kit 项目，源码： https://github.com/jrainlau/MY-Kit</p>
   </div>
 </template>
 
