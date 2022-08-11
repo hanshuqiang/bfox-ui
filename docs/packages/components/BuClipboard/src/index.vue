@@ -6,7 +6,7 @@
     <div class="clipboard" style="width:17px;height:17px;">
 
       <transition name="el-fade-in-linear">
-        <div v-if="showTip" class="txt">已复制到粘贴板</div>
+        <div v-show="showTip" class="txt">已复制到粘贴板</div>
       </transition>
 
 
