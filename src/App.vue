@@ -5,10 +5,14 @@
       <router-link @click="handleClickMenu(link.path)" :class="curActive == link.path ? 'is-active' : ''"
         v-for="(link, index) in data.links" :key="index" :to="link.path">{{ link.name }}
       </router-link>
+      <div class="version">V{{config.version}}</div>
     </div>
     <main>
       <div class="main_header">
-
+        <div class="nav">
+          <a class="active" href="https://codesandbox.io/s/bfoxui-demo-rw1x7n" target="_blank">在线编辑器</a>
+          <a class="active" href="https://jshare.com.cn/new" target="_blank">简单JS运行</a>
+        </div>
         <a href="https://github.com/hanpanapn/bfox-ui" target="_blank" class="icon"><svg
             preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24" width="1.2em" height="1.2em" data-v-6c8d2bba="">
             <path fill="currentColor"
@@ -22,6 +26,7 @@
 </template>
 
 <script setup>
+import config from '../package.json'
 import ComponentList from 'packages/list.json'
 import { reactive, ref } from 'vue'
 const isActive = ref('')
@@ -43,7 +48,11 @@ const data = reactive({
     ...ComponentList.map((item) => ({
       path: `/components/${item.compName}`,
       name: item.compZhName
-    }))
+    })),
+    {
+      path: '/blog',
+      name: '博客'
+    },
   ]
 })
 </script>
@@ -57,12 +66,19 @@ const data = reactive({
   &_sider {
     min-width: 250px;
     padding: 15px;
-
+    position: relative;
     display: flex;
     flex-direction: column;
 
     background-image: linear-gradient(#241c6d, #2d379c, #2e5c95, #2a6d9d, #1d4283); //#160e59  #18217e  1c5191 195b8b 1d4283
     box-shadow: 2px 10px 30px 0px rgb(0 0 0 / 26%), 0 4px 25px 0px rgb(0 0 0 / 12%), 0 8px 10px -5px rgb(0 0 0 / 20%);
+
+    .version {
+      position: absolute;
+      bottom: 29px;
+      right: 19px;
+      color: #c1c1c1;
+    }
 
     h4 {
       color: white;
@@ -86,12 +102,12 @@ const data = reactive({
       border-radius: 5px;
       min-width: 100px;
       // box-shadow: 3px 4px 9px 2px #ffffff1c;
-      transition:  0.2s;
+      transition: 0.2s;
 
       &:hover {
         // color: #409eff
         background-color: #ffffff61;
-         
+
       }
     }
 
@@ -112,17 +128,42 @@ const data = reactive({
     .main_header {
       border-bottom: 1px solid #dcdfe6;
       height: 50px;
-      line-height: 50px;
+
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
 
       .icon {
-        float: right;
-        line-height: 63px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
         margin-right: 20px;
 
         svg {
           width: 26px;
 
           height: 26px;
+        }
+      }
+
+      .nav {
+
+        font-size: 14px;
+        margin: 0 0 0 20px;
+
+        a {
+          text-decoration: none;
+          color: #303331;
+          margin: 0 10px;
+          font-weight: 500;
+
+          &:hover {
+            color: #409eff;
+            border-bottom: 2px solid #409eff;
+            padding: 0 0 13px 0;
+          }
+
         }
       }
     }

@@ -22,10 +22,18 @@
     component: () => import('./install/index.vue'),
   },
   {{ routes }}];
- 
+
+const routesStatic = [
+  {
+    title: '博客',
+    name: 'Blog',
+    path: '/blog',
+    component: () => import('./components/Blog.vue'),
+  },
+]
  const routerConfig = {
    history: createWebHashHistory(),
-   routes,
+   routes:routes.concat(routesStatic),
    scrollBehavior(to: any, from: any) {
      if (to.path !== from.path) {
        return { top: 0 };
