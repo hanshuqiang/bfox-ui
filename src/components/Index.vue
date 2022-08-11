@@ -9,6 +9,7 @@
         </div>
         <div class="changelog">
             <h4>更新日志</h4>
+            
             <div v-for="(item,index) in logList" :key="index">
                 <h4>{{item.date}} {{item.type}}</h4>
                 <ul>
