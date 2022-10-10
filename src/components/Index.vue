@@ -31,6 +31,12 @@ const logList = ref([
             '[bug]表头浮动bug修改',
         ]
     },
+    {
+        date: '2022-10-10',
+        description:[
+            '[优化]更新一些文案'
+        ]
+    }
     
 ])
 </script>
