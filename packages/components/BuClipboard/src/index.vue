@@ -1,14 +1,8 @@
 <template>
   <div class="clipboard-box" @click="handleCopy(text)">
     <slot>
-
     </slot>
     <div class="clipboard" style="width:17px;height:17px;">
-
-      <transition name="el-fade-in-linear">
-        <div v-if="showTip" class="txt">已复制到粘贴板</div>
-      </transition>
-
 
       <svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
         <path fill="currentColor"
@@ -35,20 +29,13 @@ const props = defineProps({
   }
 })
 const route = useRoute()
-console.log('luyou',route);
-
-const showTip = ref(false)
 
 const { toClipboard } = useClipboard()
 const handleCopy = async (msg: string) => {
   try {
     await toClipboard(msg)
-
-    showTip.value = true
-
-    setTimeout(() => {
-      showTip.value = false
-    }, 1000);
+    ElMessage({ message: '已复制到粘贴板', type: 'success', })
+    
   } catch (e) { }
 }
 </script>
@@ -61,30 +48,8 @@ const handleCopy = async (msg: string) => {
   &:hover {
     color: #409eff !important;
   }
-
   .clipboard {
     display: inline-block;
-
-    position: relative;
-
-    .txt {
-      padding: 2px 9px;
-      background: #f0f9eb;
-      width: 92px;
-      position: absolute;
-      top: -40px;
-      color: #67c23a;
-      font-size: 13px;
-      left: 21px;
-      border-radius: 4px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      z-index: 99999;
-
-    }
-
-
   }
 }
 </style>

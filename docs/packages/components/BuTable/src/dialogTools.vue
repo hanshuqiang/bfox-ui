@@ -12,7 +12,7 @@
           </el-col>
 
           <el-col :span="24">
-            <el-button style="padding: 5px 9px;   height: unset;" type="success" @click="handleSaveDiyColumn">1保存
+            <el-button style="padding: 5px 9px;   height: unset;" type="success" @click="handleSaveDiyColumn">保存
             </el-button>
             <el-button style="padding: 5px 9px;   height: unset;" type="info" @click="handleRestDiyColumn">重置
             </el-button>
@@ -50,9 +50,10 @@ const props = defineProps({
   }
 })
 const handleSaveDiyColumn = () => {
-  
+  console.log('显示额列表：',colunmVisible.value);
+   
   localStorage.setItem(
-    'by-table-column_' + routeName,
+    'bu-table-column_' + routeName,
     JSON.stringify(colunmVisible.value)
   )
   window.location.reload()

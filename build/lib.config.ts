@@ -7,10 +7,12 @@ export default defineConfig({
   ...baseConfig,
   build: {
     outDir: 'dist',
+    sourcemap: true,
     lib: {
       entry: resolve(__dirname, '../packages/index.ts'),
       name: 'Bfox',
       fileName: (format) => `bfox.${format}.js`,
+      // formats: ["esm", "umd", "iife"], // 导出模块类型
     },
     rollupOptions: {
       // 确保外部化处理那些你不想打包进库的依赖
