@@ -1,7 +1,7 @@
 {
   "name": "bfox-ui",
-  "version": "2.0.22",
-  "main": "dist/bfox-ui.umd.js",
+  "version": "2.0.23",
+  "main": "dist/bfox.umd.js",
   "description": "bfox-ui",
   "scripts": {
     "dev": "vite --config ./build/base.config.ts",
