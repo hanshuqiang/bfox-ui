@@ -51,7 +51,7 @@ const data = reactive({
     })),
     {
       path: '/blog',
-      name: '博客'
+      name: '常见问题'
     },
   ]
 })

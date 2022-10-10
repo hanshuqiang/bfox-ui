@@ -44,7 +44,7 @@ const routes = [
   }];
 const routesStatic = [
   {
-    title: '博客',
+    title: '常见问题',
     name: 'Blog',
     path: '/blog',
     component: () => import('./components/Blog.vue'),
