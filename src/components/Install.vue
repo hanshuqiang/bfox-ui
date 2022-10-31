@@ -3,9 +3,9 @@
     <h1>安装</h1>
     <h2>环境支持</h2>
     <p>
-      本项目是基于Element Plus再次封装，因此 和 Element Plus 的兼容性一致，可以在支持 ES2018 和 ResizeObserver 的浏览器上运行。 如果您确实需要支持旧版本的浏览器，请自行添加
+      本项目是基于Element Plus再次封装，因此 和 Element Plus 的兼容性一致。 如果您确实需要支持旧版本的浏览器，请自行添加
       Babel 和相应的 Polyfill 。
-      由于 Vue 3 不再支持 IE11，Element Plus 也不再支持 IE 浏览器。
+      由于 Vue 3 不再支持 IE11，BfoxUI 也不再支持 IE 浏览器。
     </p>
     <h2>版本</h2>
     <p>BFoxUI 目前还处于快速开发迭代中。</p>
