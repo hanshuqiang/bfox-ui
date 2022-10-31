@@ -112,7 +112,6 @@ if (props.customColumn) {
   } catch (error) {
     lsCol = Object.keys(props.columns)
   }
-  console.log('lsCol', routeName, lsCol);
   colunmVisible.value = lsCol
   //取出当前路由下，展示的table 列，如果没有，就使用props 传过来的列
   let t = Object.assign({}, props.columns)
@@ -229,9 +228,26 @@ const reload = async (reload = false) => {
   emits('response', res.data)
   emits('request', tempP)
 }
+/**
+ * 无刷新单条更新列表数据，row数据必须和列表中一行的数据格式一致
+ * @param {Object} row 需要更新的行数据
+ * @param {String} key 组键key,默认：id
+ */
+const reloadSync = async (row = {}, key = 'id') => {
+  if (row[key] && Array.isArray(tableData.value)) {
+    tableData.value = tableData.value.map(e => {
+      if (e[key] == row[key]) {
+        return row
+      } else {
+        return e
+      }
+    })
+  }
+}
 //对外暴露，使父组件可以用refs的方式调取到
 defineExpose({
-  reload
+  reload,
+  reloadSync
 })
 
 //生命周期
