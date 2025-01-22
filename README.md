@@ -1,7 +1,3 @@
-##项目描述
-
-基于element二次封装的UI库，主要重新封装了table组件，只需传入api地址，无需自己写多余的网络请求，数据赋值等
-
 ## 本地运行
 
 ```
@@ -28,3 +24,8 @@ npm publish
 ## 一、开发框架初始化
 
 这一套开发框架我们把它命名为 `bfox-ui`。在技术选型上使用的是 Vite + Vue3 + Typescript。
+<<<<<<< HEAD
+=======
+
+ 
+>>>>>>> parent of 9534ee7 (Update README.md)
