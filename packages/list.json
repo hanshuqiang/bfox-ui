@@ -4,23 +4,5 @@
     "compZhName": "按钮",
     "compDesc": "这是一个按钮",
     "compClassName": "button"
-  },
-  {
-    "compName": "BuClipboard",
-    "compZhName": "复制组件",
-    "compDesc": "复制文字",
-    "compClassName": "bu-clipboard"
-  },
-  {
-    "compName": "BuTable",
-    "compZhName": "表格",
-    "compDesc": "表格",
-    "compClassName": "bu-table"
-  },
-  {
-    "compName": "BuDialog",
-    "compZhName": "弹框",
-    "compDesc": "弹框",
-    "compClassName": "bu-dialog"
   }
 ]

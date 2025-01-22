@@ -19,7 +19,8 @@
       "packages/*": [
         "./packages/*",
       ]
-    }
+    },
+    "types": ["vue"]
   },
   "include": [
     "*.ts",

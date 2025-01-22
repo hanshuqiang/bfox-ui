@@ -11,15 +11,10 @@
     "gen": "node ./script/genNewComp/index.js"
   },
   "dependencies": {
-    "@element-plus/icons-vue": "^0.2.7",
     "axios": "^0.27.2",
-    "element-plus": "^2.0.1",
-    "md5": "^2.3.0",
-    "moment": "^2.29.3",
     "prismjs": "^1.25.0",
     "uuid": "^8.3.2",
-    "vue": "^3.2.23",
-    "vue-clipboard3": "^2.0.0",
+    "vue": "^3.5.13",
     "vue-router": "^4.0.12"
   },
   "devDependencies": {
@@ -36,11 +31,9 @@
     "typescript": "^4.4.4",
     "unplugin-vue-define-options": "^0.6.1",
     "vite": "^2.7.0",
-    "vite-plugin-copy": "^0.1.6",
     "vite-plugin-dts": "^0.9.6",
     "vite-plugin-md": "^0.11.4",
-    "vue-tsc": "^0.28.10",
-    "webpack": "^5.0.0"
+    "vue-tsc": "^0.28.10"
   },
   "keywords": [],
   "author": "hanpanpan",
