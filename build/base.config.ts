@@ -1,9 +1,9 @@
-import { resolve } from "path";
-import { defineConfig } from "vite";
-import vue from "@vitejs/plugin-vue";
-import Markdown from "vite-plugin-md";
-import DefineOptions from "unplugin-vue-define-options/vite";
-import vueJsx from "@vitejs/plugin-vue-jsx";
+import { resolve } from 'path'
+import { defineConfig } from 'vite'
+import vue from '@vitejs/plugin-vue'
+import Markdown from 'vite-plugin-md'
+import DefineOptions from 'unplugin-vue-define-options/vite'
+import vueJsx from '@vitejs/plugin-vue-jsx'
 // 文档: https://vitejs.dev/config/
 export default defineConfig({
   css: {
@@ -15,11 +15,11 @@ export default defineConfig({
     postcss: {
       plugins: [
         {
-          postcssPlugin: "internal:charset-removal",
+          postcssPlugin: 'internal:charset-removal',
           AtRule: {
-            charset: (atRule) => {
-              if (atRule.name === "charset") {
-                atRule.remove();
+            charset: atRule => {
+              if (atRule.name === 'charset') {
+                atRule.remove()
               }
             },
           },
@@ -29,8 +29,8 @@ export default defineConfig({
   },
   resolve: {
     alias: {
-      "@": resolve(__dirname, "../src"),
-      packages: resolve(__dirname, "../packages"),
+      '@': resolve(__dirname, '../src'),
+      packages: resolve(__dirname, '../packages'),
     },
   },
   plugins: [
@@ -41,4 +41,4 @@ export default defineConfig({
     Markdown(),
     DefineOptions(),
   ],
-});
+})

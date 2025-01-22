@@ -4,10 +4,6 @@
       <slot></slot>
     </section>
 
-
-
-
-
     <div class="preview-bottom">
       <span name="Code" @click="showSourceCode">查看代码</span>
     </div>
@@ -32,41 +28,32 @@ export default {
     compName: {
       type: String,
       default: '',
-      require: true
+      require: true,
     },
     /** 要显示代码的组件 */
     demoName: {
       type: String,
       default: '',
-      require: true
-    }
+      require: true,
+    },
   },
   data() {
     return {
       sourceCode: '',
-      codeVisible: false
+      codeVisible: false,
     }
   },
   computed: {
     previewSourceCode() {
-      return this.sourceCode.replace(
-        /'\.\.\/\.\.\/index'/g,
-        `'@tencent/bfox-ui'`
-      )
-    }
+      return this.sourceCode.replace(/'\.\.\/\.\.\/index'/g, `'@tencent/bfox-ui'`)
+    },
   },
   async mounted() {
     if (this.compName && this.demoName) {
-
       if (isDev) {
-        this.sourceCode = (
-          await import(
-            /* @vite-ignore */ `../../packages/components/${this.compName}/docs/${this.demoName}.vue?raw`
-          )
-        ).default
+        this.sourceCode = (await import(/* @vite-ignore */ `../../packages/components/${this.compName}/docs/${this.demoName}.vue?raw`)).default
       } else {
-        this.sourceCode = await fetch(`${isDev ? '' : ''}/packages/components/${this.compName}/docs/${this.demoName}.vue`
-        ).then((res) => res.text())
+        this.sourceCode = await fetch(`${isDev ? '' : ''}/packages/components/${this.compName}/docs/${this.demoName}.vue`).then(res => res.text())
       }
     }
     await this.$nextTick()
@@ -78,8 +65,8 @@ export default {
     },
     showSourceCode() {
       this.codeVisible = !this.codeVisible
-    }
-  }
+    },
+  },
 }
 </script>
 
@@ -94,11 +81,11 @@ pre {
   padding: 10px 10px 0 10px;
   border-bottom: 1px dashed #e7e7e7;
 
-  section {}
+  section {
+  }
 
   .source-code {
     max-height: 500px;
-
   }
 
   .language-html {

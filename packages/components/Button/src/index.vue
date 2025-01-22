@@ -12,15 +12,13 @@ export default {
 
 <script lang="ts" setup>
 defineEmits(['click'])
-
-
 </script>
 
 <style scoped lang="less">
 .bfox-button {
   appearance: none;
   padding: 5px 10px;
-  background: #409EFF;
+  background: #409eff;
   border: none;
   border-radius: 4px;
   color: #fff;

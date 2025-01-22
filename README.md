@@ -19,15 +19,12 @@ npm login
 ```
 
 发布
+
 ```
 npm publish
 //主意：每次提交的package.json中的版本号不能一样
 ```
 
-
-
 ## 一、开发框架初始化
 
 这一套开发框架我们把它命名为 `bfox-ui`。在技术选型上使用的是 Vite + Vue3 + Typescript。
-
- 

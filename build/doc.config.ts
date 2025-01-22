@@ -1,10 +1,10 @@
-import baseConfig from "./base.config";
-import { defineConfig } from "vite";
+import baseConfig from './base.config'
+import { defineConfig } from 'vite'
 
 export default defineConfig({
   ...baseConfig,
-  base: "./",
+  base: './',
   build: {
-    outDir: "output/docs",
+    outDir: 'output/docs',
   },
-});
+})

@@ -1,13 +1,13 @@
-import { createApp } from "vue";
-import App from "./App.vue";
-import router from "./router";
+import { createApp } from 'vue'
+import App from './App.vue'
+import router from './router'
 
-import "./assets/markdown.scss";
+import './assets/markdown.scss'
 
-import BfoxUI from "../packages";
-import Preview from "./components/Preview.vue";
+import BfoxUI from '../packages'
+import Preview from './view/Preview.vue'
 
-const app = createApp(App);
+const app = createApp(App)
 
-app.component("Preview", Preview);
-app.use(BfoxUI).use(router).mount("#app");
+app.component('Preview', Preview)
+app.use(BfoxUI).use(router).mount('#app')

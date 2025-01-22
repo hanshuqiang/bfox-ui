@@ -20,7 +20,7 @@
         "./packages/*",
       ]
     },
-    "types": ["vue"]
+    "types": ["vue", "vue-router"]
   },
   "include": [
     "*.ts",
