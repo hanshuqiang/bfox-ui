@@ -25,7 +25,7 @@ const routes = [
     title: '按钮',
     name: 'Button',
     path: '/view/Button',
-    component: () => import('packages/components/Button/docs/README.md'),
+    component: () => import('packages/components/Button/docs/base.md'),
   },
 ]
 const routesStatic = [
